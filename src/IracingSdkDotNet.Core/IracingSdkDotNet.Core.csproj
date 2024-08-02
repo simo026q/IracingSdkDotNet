@@ -11,7 +11,7 @@
         <NeutralLanguage>en</NeutralLanguage>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <Copyright>© 2024 simo026q</Copyright>
+        <Copyright>© 2024 Simon Bøye Christensen</Copyright>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <RepositoryUrl>https://github.com/simo026q/IracingSdkDotNet</RepositoryUrl>
