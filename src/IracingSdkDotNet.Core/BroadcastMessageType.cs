@@ -1,4 +1,4 @@
-﻿namespace IracingSdkDotNet;
+﻿namespace IracingSdkDotNet.Core;
 
 public enum BroadcastMessageType 
 { 

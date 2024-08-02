@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IracingSdkDotNet;
+namespace IracingSdkDotNet.Core;
 
 /// <summary>
 /// Options for the <see cref="IracingSdk"/>.

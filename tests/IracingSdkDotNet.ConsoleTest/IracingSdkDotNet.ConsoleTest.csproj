@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\IracingSdkDotNet\IracingSdkDotNet.csproj" />
+      <ProjectReference Include="..\..\src\IracingSdkDotNet.Core\IracingSdkDotNet.Core.csproj" />
     </ItemGroup>
 
 </Project>

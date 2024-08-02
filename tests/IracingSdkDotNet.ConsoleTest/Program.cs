@@ -1,4 +1,4 @@
-﻿using IracingSdkDotNet;
+﻿using IracingSdkDotNet.Core;
 using Microsoft.Extensions.Logging;
 
 using ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>

@@ -7,11 +7,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Win32.SafeHandles;
-using IracingSdkDotNet.Extensions;
-using IracingSdkDotNet.Reader;
-using IracingSdkDotNet.Internal;
+using IracingSdkDotNet.Core.Extensions;
+using IracingSdkDotNet.Core.Reader;
+using IracingSdkDotNet.Core.Internal;
 
-namespace IracingSdkDotNet;
+namespace IracingSdkDotNet.Core;
 
 /// <summary>
 /// A class to interact with iRacing's shared memory.
