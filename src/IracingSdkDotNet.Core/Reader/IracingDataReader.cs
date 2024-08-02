@@ -1,15 +1,15 @@
-﻿using IracingSdkDotNet.Extensions;
+﻿using IracingSdkDotNet.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO.MemoryMappedFiles;
 using System.Text;
-using IracingSdkDotNet.Internal;
+using IracingSdkDotNet.Core.Internal;
 
 #if NET8_0_OR_GREATER
 using System.Diagnostics.CodeAnalysis;
 #endif
 
-namespace IracingSdkDotNet.Reader;
+namespace IracingSdkDotNet.Core.Reader;
 
 /// <summary>
 /// A reader used to read data from the iRacing shared memory.

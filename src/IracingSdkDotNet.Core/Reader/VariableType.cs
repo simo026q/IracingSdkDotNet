@@ -1,4 +1,4 @@
-﻿namespace IracingSdkDotNet.Reader;
+﻿namespace IracingSdkDotNet.Core.Reader;
 
 /// <summary>
 /// Represents the value type of a <see cref="VariableHeader"/>.

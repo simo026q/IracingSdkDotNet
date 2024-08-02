@@ -1,8 +1,8 @@
-﻿using IracingSdkDotNet.Internal;
+﻿using IracingSdkDotNet.Core.Internal;
 using System.IO.MemoryMappedFiles;
 using System.Text;
 
-namespace IracingSdkDotNet.Extensions;
+namespace IracingSdkDotNet.Core.Extensions;
 
 internal static class MemoryMappedViewAccessorExtensions
 {

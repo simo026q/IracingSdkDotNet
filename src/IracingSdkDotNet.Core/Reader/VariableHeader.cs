@@ -1,4 +1,4 @@
-﻿namespace IracingSdkDotNet.Reader;
+﻿namespace IracingSdkDotNet.Core.Reader;
 
 /// <summary>
 /// Represents the header of a variable in the iRacing shared memory.

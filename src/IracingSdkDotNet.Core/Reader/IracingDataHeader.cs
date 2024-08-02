@@ -1,6 +1,6 @@
 ﻿using System.IO.MemoryMappedFiles;
 
-namespace IracingSdkDotNet.Reader;
+namespace IracingSdkDotNet.Core.Reader;
 
 /// <summary>
 /// Represents the header of the iRacing shared memory.

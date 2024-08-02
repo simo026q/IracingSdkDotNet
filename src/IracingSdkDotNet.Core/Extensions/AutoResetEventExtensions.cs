@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Threading;
 
-namespace IracingSdkDotNet.Extensions;
+namespace IracingSdkDotNet.Core.Extensions;
 
 internal static class AutoResetEventExtensions
 {

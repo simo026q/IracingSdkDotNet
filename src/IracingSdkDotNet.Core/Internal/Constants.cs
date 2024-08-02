@@ -1,4 +1,4 @@
-﻿namespace IracingSdkDotNet.Internal;
+﻿namespace IracingSdkDotNet.Core.Internal;
 
 internal static class Constants
 {
