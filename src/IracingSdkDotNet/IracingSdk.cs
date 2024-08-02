@@ -211,11 +211,6 @@ public sealed class IracingSdk
         return RegisterWindowMessage(Constants.BroadcastMessageName);
     }
 
-    /*private static IntPtr GetPadCarNumId()
-    {
-        return RegisterWindowMessage(Constants.PadCarNumName);
-    }*/
-
     public static int BroadcastMessage(BroadcastMessageType msg, int var1, int var2, int var3)
     {
         return BroadcastMessage(msg, var1, MakeLong((short)var2, (short)var3));
@@ -235,9 +230,6 @@ public sealed class IracingSdk
 
     [DllImport("user32.dll")]
     private static extern IntPtr RegisterWindowMessage(string lpProcName);
-
-    //[DllImport("user32.dll")]
-    //private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
     [DllImport("user32.dll")]
     private static extern IntPtr PostMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
