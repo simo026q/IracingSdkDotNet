@@ -13,6 +13,9 @@ using IracingSdkDotNet.Internal;
 
 namespace IracingSdkDotNet;
 
+/// <summary>
+/// A class to interact with iRacing's shared memory.
+/// </summary>
 public sealed class IracingSdk
     : IDisposable
 {
@@ -22,22 +25,52 @@ public sealed class IracingSdk
     private bool _disposed;
     private CancellationTokenSource? _loopCancellationSource;
 
+    /// <summary>
+    /// The options for the SDK.
+    /// </summary>
     public IracingSdkOptions Options { get; }
 
+    /// <summary>
+    /// Indicates if the SDK has started listening for iRacing's shared memory.
+    /// </summary>
+    /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
     public bool IsStarted => _disposed
         ? throw new ObjectDisposedException(nameof(IracingSdk))
         : _loopCancellationSource != null && !_loopCancellationSource.IsCancellationRequested;
 
+    /// <summary>
+    /// The <see cref="IracingDataReader"/> instance that is used to read the data from iRacing's shared memory.
+    /// </summary>
     public IracingDataReader? DataReader { get; private set; }
 
+    /// <summary>
+    /// Indicates if the SDK is connected to iRacing.
+    /// </summary>
+    /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
     public bool IsConnected => _disposed 
         ? throw new ObjectDisposedException(nameof(IracingSdk)) 
         : DataReader != null && (DataReader.Header.Status & 1) > 0;
 
+    /// <summary>
+    /// Occurs when the data from iRacing's shared memory has been updated. Should be updated at the same rate as the <see cref="IracingDataHeader.TickRate"/> in the data header (usually 60 Hz).
+    /// </summary>
     public event EventHandler<IracingDataReader>? DataUpdated;
+
+    /// <summary>
+    /// Occurs when the SDK has connected to iRacing.
+    /// </summary>
     public event EventHandler? Connected;
+
+    /// <summary>
+    /// Occurs when the SDK has disconnected from iRacing.
+    /// </summary>
     public event EventHandler? Disconnected;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IracingSdk"/> class.
+    /// </summary>
+    /// <param name="options">Options for the SDK.</param>
+    /// <param name="logger">A logger instace to log messages.</param>
     public IracingSdk(IracingSdkOptions? options = null, ILogger<IracingSdk>? logger = null)
     {
         // Register CP1252 encoding
@@ -49,12 +82,21 @@ public sealed class IracingSdk
         _logger = logger;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IracingSdk"/> class with predefined <see cref="MemoryMappedViewAccessor"/>.
+    /// </summary>
+    /// <remarks>Should only be used for testing purposes.</remarks>
+    /// <param name="accessor">The <see cref="MemoryMappedViewAccessor"/> to use for reading data.</param>
     public IracingSdk(MemoryMappedViewAccessor accessor)
         : this()
     {
         DataReader = new IracingDataReader(accessor, _encoding);
     }
 
+    /// <summary>
+    /// Starts the SDK and begins listening for a connection to iRacing by checking the shared memory.
+    /// </summary>
+    /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
     public void Start()
     {
         if (_disposed)
@@ -74,6 +116,10 @@ public sealed class IracingSdk
         _logger?.LogInformation("Started the Sdk.");
     }
 
+    /// <summary>
+    /// Stops the SDK and disconnects from iRacing.
+    /// </summary>
+    /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
     public void Stop()
     {
         if (_disposed)
@@ -86,6 +132,9 @@ public sealed class IracingSdk
         _logger?.LogInformation("Stopped the Sdk.");
     }
 
+    /// <summary>
+    /// Disposes the object and stops the SDK.
+    /// </summary>
     public void Dispose()
     {
         if (_disposed)

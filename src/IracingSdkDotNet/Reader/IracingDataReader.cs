@@ -11,25 +11,44 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace IracingSdkDotNet.Reader;
 
-public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Encoding encoding)
-    : IDisposable
+/// <summary>
+/// A reader used to read data from the iRacing shared memory.
+/// </summary>
+public sealed class IracingDataReader : IDisposable
 {
-    private readonly Encoding _encoding = encoding;
+    private readonly Encoding _encoding;
 
     private bool _disposed;
     private IracingDataHeader? _header;
     private Dictionary<string, VariableHeader>? _variableHeaders;
 
-    internal MemoryMappedViewAccessor ViewAccessor { get; } = viewAccessor;
+    internal IracingDataReader(MemoryMappedViewAccessor viewAccessor, Encoding encoding)
+    {
+        _encoding = encoding;
+        ViewAccessor = viewAccessor;
+    }
 
+    internal MemoryMappedViewAccessor ViewAccessor { get; }
+
+    /// <summary>
+    /// The <see cref="IracingDataHeader"/> of the current data.
+    /// </summary>
     public IracingDataHeader Header => _disposed
         ? throw new ObjectDisposedException(nameof(IracingDataReader))
         : _header ??= new IracingDataHeader(ViewAccessor);
 
+    /// <summary>
+    /// The variable headers of the current data.
+    /// </summary>
     public Dictionary<string, VariableHeader> VariableHeaders => _disposed
         ? throw new ObjectDisposedException(nameof(IracingDataReader))
         : _variableHeaders ??= ReadVariableHeaders();
 
+    /// <summary>
+    /// Reads the raw session info from the shared memory.
+    /// </summary>
+    /// <returns>Session info string in YAML format.</returns>
+    /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
     public string? ReadRawSessionInfo()
     {
         if (_disposed)
@@ -44,11 +63,11 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
 
     private Dictionary<string, VariableHeader> ReadVariableHeaders()
     {
-        var varHeaders = new Dictionary<string, VariableHeader>(Header.VarCount);
+        var varHeaders = new Dictionary<string, VariableHeader>(Header.VariableCount, StringComparer.InvariantCultureIgnoreCase);
 
-        for (int i = 0; i < Header.VarCount; i++)
+        for (int i = 0; i < Header.VariableCount; i++)
         {
-            int positionOffset = Header.VarHeaderOffset + i * VariableHeader.Size;
+            int positionOffset = Header.VariableHeaderOffset + i * VariableHeader.Size;
 
             var type = (VariableType)ViewAccessor.ReadInt32(positionOffset);
             int offset = ViewAccessor.ReadInt32(positionOffset + Constants.VarOffsetOffset);
@@ -86,6 +105,12 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
         }
     }
 
+    /// <summary>
+    /// Tries to read a string value from the shared memory.
+    /// </summary>
+    /// <param name="name">The name of the variable to read. Case-insensitive.</param>
+    /// <param name="value">The value of the variable if it exists.</param>
+    /// <returns><see langword="true"/> if the variable exists and is a string; otherwise, <see langword="false"/>.</returns>
     public bool TryReadString(string name, out string? value)
     {
         return TryReadHeaderValue(name, VariableType.Char, ReadString, out value);
@@ -96,6 +121,12 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
         }
     }
 
+    /// <summary>
+    /// Tries to read a string array from the shared memory.
+    /// </summary>
+    /// <param name="name">The name of the variable to read. Case-insensitive.</param>
+    /// <param name="value">The value of the variable if it exists.</param>
+    /// <returns><see langword="true"/> if the variable exists and is a string array; otherwise, <see langword="false"/>.</returns>
     public bool TryReadBoolean(string name, out bool value)
     {
         return TryReadHeaderValue(name, VariableType.Boolean, ReadBoolean, out value);
@@ -106,6 +137,12 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
         }
     }
 
+    /// <summary>
+    /// Tries to read a boolean array from the shared memory.
+    /// </summary>
+    /// <param name="name">The name of the variable to read. Case-insensitive.</param>
+    /// <param name="value">The value of the variable if it exists.</param>
+    /// <returns><see langword="true"/> if the variable exists and is a boolean array; otherwise, <see langword="false"/>.</returns>
     public bool TryReadBooleanArray(string name, out bool[]? value)
     {
         return TryReadHeaderValue(name, VariableType.Boolean, ReadBooleanArray, out value);
@@ -116,6 +153,12 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
         }
     }
 
+    /// <summary>
+    /// Tries to read an integer value from the shared memory.
+    /// </summary>
+    /// <param name="name">The name of the variable to read. Case-insensitive.</param>
+    /// <param name="value">The value of the variable if it exists.</param>
+    /// <returns><see langword="true"/> if the variable exists and is an integer; otherwise, <see langword="false"/>.</returns>
     public bool TryReadInt32(string name, out int value)
     {
         return TryReadHeaderValue(name, VariableType.Int32, ReadInt32, out value);
@@ -126,6 +169,12 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
         }
     }
 
+    /// <summary>
+    /// Tries to read an integer array from the shared memory.
+    /// </summary>
+    /// <param name="name">The name of the variable to read. Case-insensitive.</param>
+    /// <param name="value">The value of the variable if it exists.</param>
+    /// <returns><see langword="true"/> if the variable exists and is an integer array; otherwise, <see langword="false"/>.</returns>
     public bool TryReadInt32Array(string name, out int[]? value)
     {
         return TryReadHeaderValue(name, VariableType.Int32, ReadInt32Array, out value);
@@ -136,6 +185,12 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
         }
     }
     
+    /// <summary>
+    /// Tries to read a bit field value from the shared memory.
+    /// </summary>
+    /// <param name="name">The name of the variable to read. Case-insensitive.</param>
+    /// <param name="value">The value of the variable if it exists.</param>
+    /// <returns><see langword="true"/> if the variable exists and is a bit field; otherwise, <see langword="false"/>.</returns>
     public bool TryReadBitField(string name, out int value)
     {
         return TryReadHeaderValue(name, VariableType.BitField, ReadBitField, out value);
@@ -146,6 +201,12 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
         }
     }
     
+    /// <summary>
+    /// Tries to read a bit field array from the shared memory.
+    /// </summary>
+    /// <param name="name">The name of the variable to read. Case-insensitive.</param>
+    /// <param name="value">The value of the variable if it exists.</param>
+    /// <returns><see langword="true"/> if the variable exists and is a bit field array; otherwise, <see langword="false"/>.</returns>
     public bool TryReadBitFieldArray(string name, out int[]? value)
     {
         return TryReadHeaderValue(name, VariableType.BitField, ReadBitFieldArray, out value);
@@ -156,6 +217,12 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
         }
     }
 
+    /// <summary>
+    /// Tries to read a single-precision floating point value from the shared memory.
+    /// </summary>
+    /// <param name="name">The name of the variable to read. Case-insensitive.</param>
+    /// <param name="value">The value of the variable if it exists.</param>
+    /// <returns><see langword="true"/> if the variable exists and is a single-precision floating point value; otherwise, <see langword="false"/>.</returns>
     public bool TryReadSingle(string name, out float value)
     {
         return TryReadHeaderValue(name, VariableType.Single, ReadSingle, out value);
@@ -166,6 +233,12 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
         }
     }
 
+    /// <summary>
+    /// Tries to read a single-precision floating point array from the shared memory.
+    /// </summary>
+    /// <param name="name">The name of the variable to read. Case-insensitive.</param>
+    /// <param name="value">The value of the variable if it exists.</param>
+    /// <returns><see langword="true"/> if the variable exists and is a single-precision floating point array; otherwise, <see langword="false"/>.</returns>
     public bool TryReadSingleArray(string name, out float[]? value)
     {
         return TryReadHeaderValue(name, VariableType.Single, ReadSingleArray, out value);
@@ -176,6 +249,12 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
         }
     }
 
+    /// <summary>
+    /// Tries to read a double-precision floating point value from the shared memory.
+    /// </summary>
+    /// <param name="name">The name of the variable to read. Case-insensitive.</param>
+    /// <param name="value">The value of the variable if it exists.</param>
+    /// <returns><see langword="true"/> if the variable exists and is a double-precision floating point value; otherwise, <see langword="false"/>.</returns>
     public bool TryReadDouble(string name, out double value)
     {
         return TryReadHeaderValue(name, VariableType.Double, ReadDouble, out value);
@@ -186,6 +265,12 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
         }
     }
 
+    /// <summary>
+    /// Tries to read a double-precision floating point array from the shared memory.
+    /// </summary>
+    /// <param name="name">The name of the variable to read. Case-insensitive.</param>
+    /// <param name="value">The value of the variable if it exists.</param>
+    /// <returns><see langword="true"/> if the variable exists and is a double-precision floating point array; otherwise, <see langword="false"/>.</returns>
     public bool TryReadDoubleArray(string name, out double[]? value)
     {
         return TryReadHeaderValue(name, VariableType.Double, ReadDoubleArray, out value);
@@ -196,6 +281,12 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
         }
     }
 
+    /// <summary>
+    /// Tries to read a value from the shared memory.
+    /// </summary>
+    /// <param name="name">The name of the variable to read. Case-insensitive.</param>
+    /// <param name="value">The value of the variable if it exists.</param>
+    /// <returns><see langword="true"/> if the variable exists; otherwise, <see langword="false"/>.</returns>
     public bool TryReadValue(string name, out object? value)
     {
         if (!VariableHeaders.TryGetValue(name, out VariableHeader? varHeader))
@@ -247,6 +338,9 @@ public sealed class IracingDataReader(MemoryMappedViewAccessor viewAccessor, Enc
         }
     }
 
+    /// <summary>
+    /// Disposes the <see cref="IracingDataReader"/>.
+    /// </summary>
     public void Dispose()
     {
         Dispose(true);
