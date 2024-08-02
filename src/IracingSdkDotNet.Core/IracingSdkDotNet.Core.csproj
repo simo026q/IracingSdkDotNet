@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <Version>1.0.0-alpha.1</Version>
-        <Title>IRacing SDK DotNet</Title>
+        <Title>iRacing SDK DotNet</Title>
         <Authors>simo026q</Authors>
         <NeutralLanguage>en</NeutralLanguage>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>

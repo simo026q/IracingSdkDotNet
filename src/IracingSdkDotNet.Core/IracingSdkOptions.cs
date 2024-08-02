@@ -3,7 +3,7 @@
 namespace IracingSdkDotNet.Core;
 
 /// <summary>
-/// Options for the <see cref="IracingSdk"/>.
+/// Options for the <see cref="IracingSdkCore"/>.
 /// </summary>
 public sealed class IracingSdkOptions
 {

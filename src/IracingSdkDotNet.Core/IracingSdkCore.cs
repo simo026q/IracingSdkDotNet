@@ -16,11 +16,11 @@ namespace IracingSdkDotNet.Core;
 /// <summary>
 /// A class to interact with iRacing's shared memory.
 /// </summary>
-public sealed class IracingSdk
+public sealed class IracingSdkCore
     : IDisposable
 {
     private readonly Encoding _encoding;
-    private readonly ILogger<IracingSdk>? _logger;
+    private readonly ILogger<IracingSdkCore>? _logger;
 
     private bool _disposed;
     private CancellationTokenSource? _loopCancellationSource;
@@ -35,7 +35,7 @@ public sealed class IracingSdk
     /// </summary>
     /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
     public bool IsStarted => _disposed
-        ? throw new ObjectDisposedException(nameof(IracingSdk))
+        ? throw new ObjectDisposedException(nameof(IracingSdkCore))
         : _loopCancellationSource != null && !_loopCancellationSource.IsCancellationRequested;
 
     /// <summary>
@@ -48,7 +48,7 @@ public sealed class IracingSdk
     /// </summary>
     /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
     public bool IsConnected => _disposed 
-        ? throw new ObjectDisposedException(nameof(IracingSdk)) 
+        ? throw new ObjectDisposedException(nameof(IracingSdkCore)) 
         : DataReader != null && (DataReader.Header.Status & 1) > 0;
 
     /// <summary>
@@ -67,11 +67,11 @@ public sealed class IracingSdk
     public event EventHandler? Disconnected;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="IracingSdk"/> class.
+    /// Initializes a new instance of the <see cref="IracingSdkCore"/> class.
     /// </summary>
     /// <param name="options">Options for the SDK.</param>
     /// <param name="logger">A logger instace to log messages.</param>
-    public IracingSdk(IracingSdkOptions? options = null, ILogger<IracingSdk>? logger = null)
+    public IracingSdkCore(IracingSdkOptions? options = null, ILogger<IracingSdkCore>? logger = null)
     {
         // Register CP1252 encoding
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -83,20 +83,20 @@ public sealed class IracingSdk
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="IracingSdk"/> class with predefined <see cref="MemoryMappedViewAccessor"/>.
+    /// Initializes a new instance of the <see cref="IracingSdkCore"/> class with predefined <see cref="MemoryMappedViewAccessor"/>.
     /// </summary>
     /// <remarks>Should only be used for testing purposes.</remarks>
     /// <param name="accessor">The <see cref="MemoryMappedViewAccessor"/> to use for reading data.</param>
-    public IracingSdk(MemoryMappedViewAccessor accessor)
+    public IracingSdkCore(MemoryMappedViewAccessor accessor)
         : this()
     {
         DataReader = new IracingDataReader(accessor, _encoding);
     }
 
     /// <summary>
-    /// Finalizes an instance of the <see cref="IracingSdk"/> class.
+    /// Finalizes an instance of the <see cref="IracingSdkCore"/> class.
     /// </summary>
-    ~IracingSdk()
+    ~IracingSdkCore()
     {
         Dispose(false);
     }
@@ -108,7 +108,7 @@ public sealed class IracingSdk
     public void Start()
     {
         if (_disposed)
-            throw new ObjectDisposedException(nameof(IracingSdk));
+            throw new ObjectDisposedException(nameof(IracingSdkCore));
 
         if (IsStarted)
             return;
@@ -131,7 +131,7 @@ public sealed class IracingSdk
     public void Stop()
     {
         if (_disposed)
-            throw new ObjectDisposedException(nameof(IracingSdk));
+            throw new ObjectDisposedException(nameof(IracingSdkCore));
 
         _loopCancellationSource?.Cancel();
         _loopCancellationSource?.Dispose();

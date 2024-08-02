@@ -15,7 +15,7 @@ var options = new IracingSdkOptions
     CheckConnectionDelay = TimeSpan.FromSeconds(5)
 };
 
-using IracingSdk sdk = new(options, loggerFactory.CreateLogger<IracingSdk>());
+using IracingSdkCore sdk = new(options, loggerFactory.CreateLogger<IracingSdkCore>());
 
 sdk.DataUpdated += OnDataUpdated;
 
