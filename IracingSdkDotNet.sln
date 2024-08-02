@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IracingSdkDotNet", "src\IracingSdkDotNet\IracingSdkDotNet.csproj", "{588051D9-8855-4C55-8B58-E71C1F9A27DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IracingSdkDotNet.ConsoleTest", "tests\IracingSdkDotNet.ConsoleTest\IracingSdkDotNet.ConsoleTest.csproj", "{9056E20A-CD7D-4A0D-A964-F2C1B97DAD68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1DBEAB86-B4EE-4A09-B67D-3EF258427947}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A0290058-5F3C-4D09-BBBB-4BDC3B466AA6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{588051D9-8855-4C55-8B58-E71C1F9A27DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{588051D9-8855-4C55-8B58-E71C1F9A27DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{588051D9-8855-4C55-8B58-E71C1F9A27DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{588051D9-8855-4C55-8B58-E71C1F9A27DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9056E20A-CD7D-4A0D-A964-F2C1B97DAD68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9056E20A-CD7D-4A0D-A964-F2C1B97DAD68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9056E20A-CD7D-4A0D-A964-F2C1B97DAD68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9056E20A-CD7D-4A0D-A964-F2C1B97DAD68}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{588051D9-8855-4C55-8B58-E71C1F9A27DB} = {1DBEAB86-B4EE-4A09-B67D-3EF258427947}
+		{9056E20A-CD7D-4A0D-A964-F2C1B97DAD68} = {A0290058-5F3C-4D09-BBBB-4BDC3B466AA6}
+	EndGlobalSection
+EndGlobal
