@@ -28,6 +28,14 @@ public sealed class IracingDataReader : IDisposable
         ViewAccessor = viewAccessor;
     }
 
+    /// <summary>
+    /// Finalizes an instance of the <see cref="IracingDataReader"/> class.
+    /// </summary>
+    ~IracingDataReader()
+    {
+        Dispose(false);
+    }
+
     internal MemoryMappedViewAccessor ViewAccessor { get; }
 
     /// <summary>

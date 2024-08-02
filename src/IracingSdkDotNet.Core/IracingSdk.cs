@@ -94,6 +94,14 @@ public sealed class IracingSdk
     }
 
     /// <summary>
+    /// Finalizes an instance of the <see cref="IracingSdk"/> class.
+    /// </summary>
+    ~IracingSdk()
+    {
+        Dispose(false);
+    }
+
+    /// <summary>
     /// Starts the SDK and begins listening for a connection to iRacing by checking the shared memory.
     /// </summary>
     /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
@@ -137,17 +145,31 @@ public sealed class IracingSdk
     /// </summary>
     public void Dispose()
     {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Disposes the object and stops the SDK.
+    /// </summary>
+    /// <param name="disposing">Indicates if the object is being disposed.</param>
+    private void Dispose(bool disposing)
+    {
         if (_disposed)
+        {
             return;
+        }
+
+        if (disposing)
+        {
+            // Dispose managed resources
+        }
 
         Stop();
-
         DataReader?.Dispose();
         DataReader = null;
 
         _disposed = true;
-
-        GC.SuppressFinalize(this);
     }
 
     private async Task ConnectionLoop(CancellationToken cancellationToken)
