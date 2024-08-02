@@ -1,7 +1,7 @@
 ﻿using IracingSdkDotNet;
 using Microsoft.Extensions.Logging;
 
-using var loggerFactory = LoggerFactory.Create(builder =>
+using ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
 {
     builder.AddConsole().SetMinimumLevel(LogLevel.Debug);
 });
@@ -16,3 +16,5 @@ using IracingSdk sdk = new(options, loggerFactory.CreateLogger<IracingSdk>());
 sdk.Start();
 
 Console.ReadKey();
+
+// The IDisposable implementation of IracingSdk will automatically stop the SDK when it is disposed.
