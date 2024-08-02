@@ -92,7 +92,7 @@ public sealed class IracingDataReader : IDisposable
     }
 
 #if NET8_0_OR_GREATER
-    private bool TryReadHeaderValue<T>(string name, VariableType type, Func<VariableHeader, int, T> unsafeReader, [MaybeNullWhen(false)] out T? value)
+    private bool TryReadHeaderValue<T>(string name, VariableType type, Func<VariableHeader, int, T> unsafeReader, [MaybeNullWhen(false)] out T value)
 #else
     private bool TryReadHeaderValue<T>(string name, VariableType type, Func<VariableHeader, int, T> unsafeReader, out T? value)
 #endif
@@ -124,7 +124,7 @@ public sealed class IracingDataReader : IDisposable
     /// <param name="value">The value of the variable if it exists.</param>
     /// <returns><see langword="true"/> if the variable exists and is a string; otherwise, <see langword="false"/>.</returns>
 #if NET8_0_OR_GREATER
-    public bool TryReadString(string name, [MaybeNullWhen(false)] out string? value)
+    public bool TryReadString(string name, [MaybeNullWhen(false)] out string value)
 #else
     public bool TryReadString(string name, out string? value)
 #endif
@@ -164,7 +164,7 @@ public sealed class IracingDataReader : IDisposable
     /// <param name="value">The value of the variable if it exists.</param>
     /// <returns><see langword="true"/> if the variable exists and is a boolean array; otherwise, <see langword="false"/>.</returns>
 #if NET8_0_OR_GREATER
-    public bool TryReadBooleanArray(string name, [MaybeNullWhen(false)] out bool[]? value)
+    public bool TryReadBooleanArray(string name, [MaybeNullWhen(false)] out bool[] value)
 #else
     public bool TryReadBooleanArray(string name, out bool[]? value)
 #endif
@@ -204,7 +204,7 @@ public sealed class IracingDataReader : IDisposable
     /// <param name="value">The value of the variable if it exists.</param>
     /// <returns><see langword="true"/> if the variable exists and is an integer array; otherwise, <see langword="false"/>.</returns>
 #if NET8_0_OR_GREATER
-    public bool TryReadInt32Array(string name, [MaybeNullWhen(false)] out int[]? value)
+    public bool TryReadInt32Array(string name, [MaybeNullWhen(false)] out int[] value)
 #else
     public bool TryReadInt32Array(string name, out int[]? value)
 #endif
@@ -224,14 +224,22 @@ public sealed class IracingDataReader : IDisposable
     /// <param name="value">The value of the variable if it exists.</param>
     /// <returns><see langword="true"/> if the variable exists and is a bit field; otherwise, <see langword="false"/>.</returns>
 #if NET8_0_OR_GREATER
-    public bool TryReadBitField(string name, [MaybeNullWhen(false)] out int value)
+    public bool TryReadBitField<T>(string name, [MaybeNullWhen(false)] out T value)
 #else
-    public bool TryReadBitField(string name, out int value)
+    public bool TryReadBitField<T>(string name, out T value)
 #endif
+        where T : struct, Enum
     {
-        return TryReadHeaderValue(name, VariableType.BitField, ReadBitField, out value);
+        if (TryReadHeaderValue(name, VariableType.BitField, ReadInt32, out int intValue) && intValue is T result)
+        {
+            value = result;
+            return true;
+        }
 
-        int ReadBitField(VariableHeader _, int position)
+        value = default;
+        return false;
+
+        int ReadInt32(VariableHeader _, int position)
         {
             return ViewAccessor.ReadInt32(position);
         }
@@ -244,14 +252,22 @@ public sealed class IracingDataReader : IDisposable
     /// <param name="value">The value of the variable if it exists.</param>
     /// <returns><see langword="true"/> if the variable exists and is a bit field array; otherwise, <see langword="false"/>.</returns>
 #if NET8_0_OR_GREATER
-    public bool TryReadBitFieldArray(string name, [MaybeNullWhen(false)] out int[]? value)
+    public bool TryReadBitFieldArray<T>(string name, [MaybeNullWhen(false)] out T[] value)
 #else
-    public bool TryReadBitFieldArray(string name, out int[]? value)
+    public bool TryReadBitFieldArray<T>(string name, out T[]? value)
 #endif
+        where T : struct, Enum
     {
-        return TryReadHeaderValue(name, VariableType.BitField, ReadBitFieldArray, out value);
+        if (TryReadHeaderValue(name, VariableType.BitField, ReadInt32Array, out int[]? intValue) && intValue is T[] result)
+        {
+            value = result;
+            return true;
+        }
 
-        int[] ReadBitFieldArray(VariableHeader header, int position)
+        value = default;
+        return false;
+
+        int[] ReadInt32Array(VariableHeader header, int position)
         {
             return ViewAccessor.ReadArray<int>(position, header.Count);
         }
@@ -284,7 +300,7 @@ public sealed class IracingDataReader : IDisposable
     /// <param name="value">The value of the variable if it exists.</param>
     /// <returns><see langword="true"/> if the variable exists and is a single-precision floating point array; otherwise, <see langword="false"/>.</returns>
 #if NET8_0_OR_GREATER
-    public bool TryReadSingleArray(string name, [MaybeNullWhen(false)] out float[]? value)
+    public bool TryReadSingleArray(string name, [MaybeNullWhen(false)] out float[] value)
 #else
     public bool TryReadSingleArray(string name, out float[]? value)
 #endif
@@ -324,7 +340,7 @@ public sealed class IracingDataReader : IDisposable
     /// <param name="value">The value of the variable if it exists.</param>
     /// <returns><see langword="true"/> if the variable exists and is a double-precision floating point array; otherwise, <see langword="false"/>.</returns>
 #if NET8_0_OR_GREATER
-    public bool TryReadDoubleArray(string name, [MaybeNullWhen(false)] out double[]? value)
+    public bool TryReadDoubleArray(string name, [MaybeNullWhen(false)] out double[] value)
 #else
     public bool TryReadDoubleArray(string name, out double[]? value)
 #endif
@@ -344,7 +360,7 @@ public sealed class IracingDataReader : IDisposable
     /// <param name="value">The value of the variable if it exists.</param>
     /// <returns><see langword="true"/> if the variable exists; otherwise, <see langword="false"/>.</returns>
 #if NET8_0_OR_GREATER
-    public bool TryReadValue(string name, [MaybeNullWhen(false)] out object? value)
+    public bool TryReadValue(string name, [MaybeNullWhen(false)] out object value)
 #else
     public bool TryReadValue(string name, out object? value)
 #endif
