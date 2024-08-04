@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.IO.MemoryMappedFiles;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -301,41 +300,5 @@ public sealed class IracingSdkCore
         }
 
         _logger.LogDataLoopExited();
-    }
-
-    private static IntPtr GetBroadcastMessageId()
-    {
-        return RegisterWindowMessage(Constants.BroadcastMessageName);
-    }
-
-    public static int BroadcastMessage(BroadcastMessageType msg, int var1, int var2, int var3)
-    {
-        return BroadcastMessage(msg, var1, MakeLong((short)var2, (short)var3));
-    }
-
-    public static int BroadcastMessage(BroadcastMessageType msg, int var1, int var2)
-    {
-        IntPtr msgId = GetBroadcastMessageId();
-        IntPtr hwndBroadcast = IntPtr.Add(IntPtr.Zero, 0xffff);
-        IntPtr result = IntPtr.Zero;
-        if (msgId != IntPtr.Zero)
-        {
-            result = PostMessage(hwndBroadcast, msgId.ToInt32(), MakeLong((short)msg, (short)var1), var2);
-        }
-        return result.ToInt32();
-    }
-
-    [DllImport("user32.dll")]
-    private static extern IntPtr RegisterWindowMessage(string lpProcName);
-
-    [DllImport("user32.dll")]
-    private static extern IntPtr PostMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-
-    [DllImport("Kernel32.dll", CharSet = CharSet.Auto)]
-    private static extern IntPtr OpenEvent(uint dwDesiredAccess, bool bInheritHandle, string lpName);
-
-    private static int MakeLong(short lowPart, short highPart)
-    {
-        return (int)(((ushort)lowPart) | (uint)(highPart << 16));
     }
 }
