@@ -13,10 +13,10 @@ internal static partial class NativeMethods
     /// <param name="lpName">The name of the event to be opened. Name comparisons are case sensitive.</param>
     /// <returns>If the function succeeds, the return value is a handle to the event object. If the function fails, the return value is <see langword="null"/>.</returns>
 #if NET8_0_OR_GREATER
-    [LibraryImport("Kernel32.dll", StringMarshalling = StringMarshalling.Utf16)]
+    [LibraryImport("Kernel32.dll", EntryPoint = "OpenEventW", StringMarshalling = StringMarshalling.Utf16)]
     public static partial IntPtr OpenEvent(uint dwDesiredAccess, [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle, string lpName);
 #else
-    [DllImport("Kernel32.dll", CharSet = CharSet.Auto)]
+    [DllImport("Kernel32.dll", CharSet = CharSet.Unicode)]
     public static extern IntPtr OpenEvent(uint dwDesiredAccess, bool bInheritHandle, string lpName);
 #endif
 
