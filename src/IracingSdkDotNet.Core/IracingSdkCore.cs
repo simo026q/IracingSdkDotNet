@@ -10,6 +10,7 @@ using Microsoft.Win32.SafeHandles;
 using IracingSdkDotNet.Core.Extensions;
 using IracingSdkDotNet.Core.Reader;
 using IracingSdkDotNet.Core.Internal;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace IracingSdkDotNet.Core;
 
@@ -20,7 +21,7 @@ public sealed class IracingSdkCore
     : IDisposable
 {
     private readonly Encoding _encoding;
-    private readonly ILogger<IracingSdkCore>? _logger;
+    private readonly ILogger<IracingSdkCore> _logger;
 
     private bool _disposed;
     private CancellationTokenSource? _loopCancellationSource;
@@ -71,15 +72,40 @@ public sealed class IracingSdkCore
     /// </summary>
     /// <param name="options">Options for the SDK.</param>
     /// <param name="logger">A logger instace to log messages.</param>
-    public IracingSdkCore(IracingSdkOptions? options = null, ILogger<IracingSdkCore>? logger = null)
+    public IracingSdkCore(IracingSdkOptions options, ILogger<IracingSdkCore> logger)
     {
         // Register CP1252 encoding
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         _encoding = Encoding.GetEncoding(1252);
 
-        Options = options ?? IracingSdkOptions.Default;
-
+        Options = options;
         _logger = logger;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IracingSdkCore"/> class.
+    /// </summary>
+    /// <param name="options">Options for the SDK.</param>
+    public IracingSdkCore(IracingSdkOptions options)
+        : this(options, NullLogger<IracingSdkCore>.Instance)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IracingSdkCore"/> class with default options.
+    /// </summary>
+    /// <param name="logger">A logger instace to log messages.</param>
+    public IracingSdkCore(ILogger<IracingSdkCore> logger)
+        : this(IracingSdkOptions.Default, logger)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IracingSdkCore"/> class with default options.
+    /// </summary>
+    public IracingSdkCore()
+        : this(IracingSdkOptions.Default, NullLogger<IracingSdkCore>.Instance)
+    {
     }
 
     /// <summary>
@@ -113,6 +139,8 @@ public sealed class IracingSdkCore
         if (IsStarted)
             return;
 
+        _logger.LogStarting();
+
         _loopCancellationSource = new();
 
         Task.Factory.StartNew(
@@ -120,8 +148,6 @@ public sealed class IracingSdkCore
             _loopCancellationSource.Token,
             TaskCreationOptions.LongRunning,
             TaskScheduler.Default);
-
-        _logger?.LogInformation("Started the Sdk.");
     }
 
     /// <summary>
@@ -133,11 +159,11 @@ public sealed class IracingSdkCore
         if (_disposed)
             throw new ObjectDisposedException(nameof(IracingSdkCore));
 
+        _logger.LogStopping();
+
         _loopCancellationSource?.Cancel();
         _loopCancellationSource?.Dispose();
         _loopCancellationSource = null;
-
-        _logger?.LogInformation("Stopped the Sdk.");
     }
 
     /// <summary>
@@ -188,7 +214,7 @@ public sealed class IracingSdkCore
                         MemoryMappedViewAccessor viewAccessor = memoryMappedFile.CreateViewAccessor(0, 0, MemoryMappedFileAccess.Read);
                         DataReader = new IracingDataReader(viewAccessor, _encoding);
 
-                        _logger?.LogDebug("Created IracingDataReader.");
+                        _logger.LogMemoryMappedFileOpened();
 
                         nint eventHandle = OpenEvent(Constants.DesiredAccess, false, Constants.DataValidEventName);
                         var safeWaitHandle = new SafeWaitHandle(eventHandle, true);
@@ -210,18 +236,18 @@ public sealed class IracingSdkCore
                     }
                     catch (FileNotFoundException ex)
                     {
-                        _logger?.LogWarning(ex, "Could not open iRacing's memory mapped file.");
+                        _logger.LogMemoryMappedFileOpenFailed(ex);
                     }
                 }
 
                 try
                 {
-                    _logger?.LogInformation("Waiting {CheckConnectionDelay} before retrying to connect to iRacing.", Options.CheckConnectionDelay);
+                    _logger.LogWaitingForConnectionRetry(Options.CheckConnectionDelay);
                     await Task.Delay(Options.CheckConnectionDelay, cancellationToken);
                 }
                 catch (OperationCanceledException)
                 {
-                    _logger?.LogTrace("The CancellationToken was cancelled while waiting for next connect retry to iRacing.");
+                    _logger.LogConnectionRetryWaitCancelled();
                     break;
                 }
             }
@@ -237,7 +263,7 @@ public sealed class IracingSdkCore
 #endif
         dataCts = null;
 
-        _logger?.LogDebug("Exited the connection loop.");
+        _logger.LogConnectionLoopExited();
     }
 
     private async Task DataLoop(AutoResetEvent autoResetEvent, CancellationToken cancellationToken)
@@ -248,7 +274,7 @@ public sealed class IracingSdkCore
         {
             try
             {
-                var valid = await autoResetEvent.WaitOneAsync(cancellationToken);
+                bool valid = await autoResetEvent.WaitOneAsync(cancellationToken);
 
                 if (valid)
                 {
@@ -256,25 +282,25 @@ public sealed class IracingSdkCore
                     {
                         wasValid = true;
                         Connected?.Invoke(this, EventArgs.Empty);
-                        _logger?.LogInformation("Connected to iRacing.");
+                        _logger.LogConnected();
                     }
 
                     DataUpdated?.Invoke(this, DataReader);
-                    _logger?.LogTrace("Data changed.");
+                    _logger.LogDataUpdated();
                 }
                 else if (wasValid)
                 {
                     Disconnected?.Invoke(this, EventArgs.Empty);
-                    _logger?.LogWarning("Disconnected from iRacing.");
+                    _logger.LogDisconnected();
                 }
             }
             catch (Exception ex)
             {
-                _logger?.LogWarning(ex, "Error while waiting in data loop");
+                _logger.LogDataLoopWaitError(ex);
             }
         }
 
-        _logger?.LogDebug("Exited the data loop.");
+        _logger.LogDataLoopExited();
     }
 
     private static IntPtr GetBroadcastMessageId()
