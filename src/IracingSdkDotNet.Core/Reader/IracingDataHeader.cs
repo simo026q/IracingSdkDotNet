@@ -21,6 +21,11 @@ public sealed class IracingDataHeader(MemoryMappedViewAccessor viewAccessor)
     public int Status => _viewAccessor.ReadInt32(4);
 
     /// <summary>
+    /// Indicates that the status is connected.
+    /// </summary>
+    public bool IsConnected => (Status & 1) > 0;
+
+    /// <summary>
     /// The telemetry update tick rate.
     /// </summary>
     public int TickRate => _viewAccessor.ReadInt32(8);
