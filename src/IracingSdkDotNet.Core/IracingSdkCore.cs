@@ -211,12 +211,12 @@ public sealed class IracingSdkCore
                     try
                     {
                         using var memoryMappedFile = MemoryMappedFile.OpenExisting(Constants.MemMapFileName, MemoryMappedFileRights.Read);
-                        MemoryMappedViewAccessor viewAccessor = memoryMappedFile.CreateViewAccessor(0, 0, MemoryMappedFileAccess.Read);
+                        MemoryMappedViewAccessor viewAccessor = memoryMappedFile.CreateViewAccessor(0L, 0L, MemoryMappedFileAccess.Read);
                         DataReader = new IracingDataReader(viewAccessor, _encoding);
 
                         _logger.LogMemoryMappedFileOpened();
 
-                        nint eventHandle = OpenEvent(Constants.DesiredAccess, false, Constants.DataValidEventName);
+                        nint eventHandle = NativeMethods.OpenEvent(Constants.DesiredAccess, false, Constants.DataValidEventName);
                         var safeWaitHandle = new SafeWaitHandle(eventHandle, true);
 
                         var autoResetEvent = new AutoResetEvent(false) 

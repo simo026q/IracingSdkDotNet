@@ -16,6 +16,7 @@
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <RepositoryUrl>https://github.com/simo026q/IracingSdkDotNet</RepositoryUrl>
         <PackageProjectUrl>https://github.com/simo026q/IracingSdkDotNet</PackageProjectUrl>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <ItemGroup>
