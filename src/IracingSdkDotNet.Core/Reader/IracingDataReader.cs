@@ -62,7 +62,7 @@ public sealed class IracingDataReader : IDisposable
 
         return Header is null
             ? null
-            : ViewAccessor.ReadString(Header.SessionInfoOffset, Header.SessionInfoLength, Constants.DataEncoding);
+            : ViewAccessor.ReadString(Header.SessionInfoOffset, Header.SessionInfoLength);
     }
 
     private Dictionary<string, VariableHeader> ReadVariableHeaders()
@@ -77,9 +77,9 @@ public sealed class IracingDataReader : IDisposable
             int offset = ViewAccessor.ReadInt32(positionOffset + Constants.VarOffsetOffset);
             int count = ViewAccessor.ReadInt32(positionOffset + Constants.VarCountOffset);
 
-            string name = ViewAccessor.ReadString(positionOffset + Constants.VarNameOffset, Constants.MaxString, Constants.DataEncoding);
-            string desc = ViewAccessor.ReadString(positionOffset + Constants.VarDescOffset, Constants.MaxDesc, Constants.DataEncoding);
-            string unit = ViewAccessor.ReadString(positionOffset + Constants.VarUnitOffset, Constants.MaxString, Constants.DataEncoding);
+            string name = ViewAccessor.ReadString(positionOffset + Constants.VarNameOffset, Constants.MaxString);
+            string desc = ViewAccessor.ReadString(positionOffset + Constants.VarDescOffset, Constants.MaxDesc);
+            string unit = ViewAccessor.ReadString(positionOffset + Constants.VarUnitOffset, Constants.MaxString);
 
             varHeaders[name] = new VariableHeader(type, offset, count, name, desc, unit);
         }
@@ -129,7 +129,7 @@ public sealed class IracingDataReader : IDisposable
 
         string ReadString(VariableHeader header, int position)
         {
-            return ViewAccessor.ReadString(position, header.Count, Constants.DataEncoding);
+            return ViewAccessor.ReadString(position, header.Count);
         }
     }
 
@@ -372,7 +372,7 @@ public sealed class IracingDataReader : IDisposable
         switch (varHeader.Type)
         {
             case VariableType.Char:
-                value = ViewAccessor.ReadString(position, varHeader.Count, Constants.DataEncoding);
+                value = ViewAccessor.ReadString(position, varHeader.Count);
                 return true;
 
             case VariableType.Boolean:
