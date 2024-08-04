@@ -1,0 +1,3442 @@
+{
+  "SessionTime": {
+    "Type": "Double",
+    "Offset": 0,
+    "Count": 1,
+    "Name": "SessionTime",
+    "Description": "Seconds since session start",
+    "Unit": "s",
+    "Bytes": 8,
+    "Length": 8
+  },
+  "SessionTick": {
+    "Type": "Int32",
+    "Offset": 8,
+    "Count": 1,
+    "Name": "SessionTick",
+    "Description": "Current update number",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SessionNum": {
+    "Type": "Int32",
+    "Offset": 12,
+    "Count": 1,
+    "Name": "SessionNum",
+    "Description": "Session number",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SessionState": {
+    "Type": "Int32",
+    "Offset": 16,
+    "Count": 1,
+    "Name": "SessionState",
+    "Description": "Session state",
+    "Unit": "irsdk_SessionState",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SessionUniqueID": {
+    "Type": "Int32",
+    "Offset": 20,
+    "Count": 1,
+    "Name": "SessionUniqueID",
+    "Description": "Session ID",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SessionFlags": {
+    "Type": "BitField",
+    "Offset": 24,
+    "Count": 1,
+    "Name": "SessionFlags",
+    "Description": "Session flags",
+    "Unit": "irsdk_Flags",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SessionTimeRemain": {
+    "Type": "Double",
+    "Offset": 28,
+    "Count": 1,
+    "Name": "SessionTimeRemain",
+    "Description": "Seconds left till session ends",
+    "Unit": "s",
+    "Bytes": 8,
+    "Length": 8
+  },
+  "SessionLapsRemain": {
+    "Type": "Int32",
+    "Offset": 36,
+    "Count": 1,
+    "Name": "SessionLapsRemain",
+    "Description": "Old laps left till session ends use SessionLapsRemainEx",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SessionLapsRemainEx": {
+    "Type": "Int32",
+    "Offset": 40,
+    "Count": 1,
+    "Name": "SessionLapsRemainEx",
+    "Description": "New improved laps left till session ends",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SessionTimeTotal": {
+    "Type": "Double",
+    "Offset": 44,
+    "Count": 1,
+    "Name": "SessionTimeTotal",
+    "Description": "Total number of seconds in session",
+    "Unit": "s",
+    "Bytes": 8,
+    "Length": 8
+  },
+  "SessionLapsTotal": {
+    "Type": "Int32",
+    "Offset": 52,
+    "Count": 1,
+    "Name": "SessionLapsTotal",
+    "Description": "Total number of laps in session",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SessionJokerLapsRemain": {
+    "Type": "Int32",
+    "Offset": 56,
+    "Count": 1,
+    "Name": "SessionJokerLapsRemain",
+    "Description": "Joker laps remaining to be taken",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SessionOnJokerLap": {
+    "Type": "Boolean",
+    "Offset": 60,
+    "Count": 1,
+    "Name": "SessionOnJokerLap",
+    "Description": "Player is currently completing a joker lap",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "SessionTimeOfDay": {
+    "Type": "Single",
+    "Offset": 61,
+    "Count": 1,
+    "Name": "SessionTimeOfDay",
+    "Description": "Time of day in seconds",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RadioTransmitCarIdx": {
+    "Type": "Int32",
+    "Offset": 65,
+    "Count": 1,
+    "Name": "RadioTransmitCarIdx",
+    "Description": "The car index of the current person speaking on the radio",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RadioTransmitRadioIdx": {
+    "Type": "Int32",
+    "Offset": 69,
+    "Count": 1,
+    "Name": "RadioTransmitRadioIdx",
+    "Description": "The radio index of the current person speaking on the radio",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RadioTransmitFrequencyIdx": {
+    "Type": "Int32",
+    "Offset": 73,
+    "Count": 1,
+    "Name": "RadioTransmitFrequencyIdx",
+    "Description": "The frequency index of the current person speaking on the radio",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "DisplayUnits": {
+    "Type": "Int32",
+    "Offset": 77,
+    "Count": 1,
+    "Name": "DisplayUnits",
+    "Description": "Default units for the user interface 0 = english 1 = metric",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "DriverMarker": {
+    "Type": "Boolean",
+    "Offset": 81,
+    "Count": 1,
+    "Name": "DriverMarker",
+    "Description": "Driver activated flag",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "PushToTalk": {
+    "Type": "Boolean",
+    "Offset": 82,
+    "Count": 1,
+    "Name": "PushToTalk",
+    "Description": "Push to talk button state",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "PushToPass": {
+    "Type": "Boolean",
+    "Offset": 83,
+    "Count": 1,
+    "Name": "PushToPass",
+    "Description": "Push to pass button state",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "ManualBoost": {
+    "Type": "Boolean",
+    "Offset": 84,
+    "Count": 1,
+    "Name": "ManualBoost",
+    "Description": "Hybrid manual boost state",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "ManualNoBoost": {
+    "Type": "Boolean",
+    "Offset": 85,
+    "Count": 1,
+    "Name": "ManualNoBoost",
+    "Description": "Hybrid manual no boost state",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "IsOnTrack": {
+    "Type": "Boolean",
+    "Offset": 86,
+    "Count": 1,
+    "Name": "IsOnTrack",
+    "Description": "1=Car on track physics running with player in car",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "IsReplayPlaying": {
+    "Type": "Boolean",
+    "Offset": 87,
+    "Count": 1,
+    "Name": "IsReplayPlaying",
+    "Description": "0=replay not playing  1=replay playing",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "ReplayFrameNum": {
+    "Type": "Int32",
+    "Offset": 88,
+    "Count": 1,
+    "Name": "ReplayFrameNum",
+    "Description": "Integer replay frame number (60 per second)",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ReplayFrameNumEnd": {
+    "Type": "Int32",
+    "Offset": 92,
+    "Count": 1,
+    "Name": "ReplayFrameNumEnd",
+    "Description": "Integer replay frame number from end of tape",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "IsDiskLoggingEnabled": {
+    "Type": "Boolean",
+    "Offset": 96,
+    "Count": 1,
+    "Name": "IsDiskLoggingEnabled",
+    "Description": "0=disk based telemetry turned off  1=turned on",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "IsDiskLoggingActive": {
+    "Type": "Boolean",
+    "Offset": 97,
+    "Count": 1,
+    "Name": "IsDiskLoggingActive",
+    "Description": "0=disk based telemetry file not being written  1=being written",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "FrameRate": {
+    "Type": "Single",
+    "Offset": 98,
+    "Count": 1,
+    "Name": "FrameRate",
+    "Description": "Average frames per second",
+    "Unit": "fps",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "CpuUsageFG": {
+    "Type": "Single",
+    "Offset": 102,
+    "Count": 1,
+    "Name": "CpuUsageFG",
+    "Description": "Percent of available tim fg thread took with a 1 sec avg",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "GpuUsage": {
+    "Type": "Single",
+    "Offset": 106,
+    "Count": 1,
+    "Name": "GpuUsage",
+    "Description": "Percent of available tim gpu took with a 1 sec avg",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ChanAvgLatency": {
+    "Type": "Single",
+    "Offset": 110,
+    "Count": 1,
+    "Name": "ChanAvgLatency",
+    "Description": "Communications average latency",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ChanLatency": {
+    "Type": "Single",
+    "Offset": 114,
+    "Count": 1,
+    "Name": "ChanLatency",
+    "Description": "Communications latency",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ChanQuality": {
+    "Type": "Single",
+    "Offset": 118,
+    "Count": 1,
+    "Name": "ChanQuality",
+    "Description": "Communications quality",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ChanPartnerQuality": {
+    "Type": "Single",
+    "Offset": 122,
+    "Count": 1,
+    "Name": "ChanPartnerQuality",
+    "Description": "Partner communications quality",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "CpuUsageBG": {
+    "Type": "Single",
+    "Offset": 126,
+    "Count": 1,
+    "Name": "CpuUsageBG",
+    "Description": "Percent of available tim bg thread took with a 1 sec avg",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ChanClockSkew": {
+    "Type": "Single",
+    "Offset": 130,
+    "Count": 1,
+    "Name": "ChanClockSkew",
+    "Description": "Communications server clock skew",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "MemPageFaultSec": {
+    "Type": "Single",
+    "Offset": 134,
+    "Count": 1,
+    "Name": "MemPageFaultSec",
+    "Description": "Memory page faults per second",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "MemSoftPageFaultSec": {
+    "Type": "Single",
+    "Offset": 138,
+    "Count": 1,
+    "Name": "MemSoftPageFaultSec",
+    "Description": "Memory soft page faults per second",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarPosition": {
+    "Type": "Int32",
+    "Offset": 142,
+    "Count": 1,
+    "Name": "PlayerCarPosition",
+    "Description": "Players position in race",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarClassPosition": {
+    "Type": "Int32",
+    "Offset": 146,
+    "Count": 1,
+    "Name": "PlayerCarClassPosition",
+    "Description": "Players class position in race",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarClass": {
+    "Type": "Int32",
+    "Offset": 150,
+    "Count": 1,
+    "Name": "PlayerCarClass",
+    "Description": "Player car class id",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerTrackSurface": {
+    "Type": "Int32",
+    "Offset": 154,
+    "Count": 1,
+    "Name": "PlayerTrackSurface",
+    "Description": "Players car track surface type",
+    "Unit": "irsdk_TrkLoc",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerTrackSurfaceMaterial": {
+    "Type": "Int32",
+    "Offset": 158,
+    "Count": 1,
+    "Name": "PlayerTrackSurfaceMaterial",
+    "Description": "Players car track surface material type",
+    "Unit": "irsdk_TrkSurf",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarIdx": {
+    "Type": "Int32",
+    "Offset": 162,
+    "Count": 1,
+    "Name": "PlayerCarIdx",
+    "Description": "Players carIdx",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarTeamIncidentCount": {
+    "Type": "Int32",
+    "Offset": 166,
+    "Count": 1,
+    "Name": "PlayerCarTeamIncidentCount",
+    "Description": "Players team incident count for this session",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarMyIncidentCount": {
+    "Type": "Int32",
+    "Offset": 170,
+    "Count": 1,
+    "Name": "PlayerCarMyIncidentCount",
+    "Description": "Players own incident count for this session",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarDriverIncidentCount": {
+    "Type": "Int32",
+    "Offset": 174,
+    "Count": 1,
+    "Name": "PlayerCarDriverIncidentCount",
+    "Description": "Teams current drivers incident count for this session",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarWeightPenalty": {
+    "Type": "Single",
+    "Offset": 178,
+    "Count": 1,
+    "Name": "PlayerCarWeightPenalty",
+    "Description": "Players weight penalty",
+    "Unit": "kg",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarPowerAdjust": {
+    "Type": "Single",
+    "Offset": 182,
+    "Count": 1,
+    "Name": "PlayerCarPowerAdjust",
+    "Description": "Players power adjust",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarDryTireSetLimit": {
+    "Type": "Int32",
+    "Offset": 186,
+    "Count": 1,
+    "Name": "PlayerCarDryTireSetLimit",
+    "Description": "Players dry tire set limit",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarTowTime": {
+    "Type": "Single",
+    "Offset": 190,
+    "Count": 1,
+    "Name": "PlayerCarTowTime",
+    "Description": "Players car is being towed if time is greater than zero",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarInPitStall": {
+    "Type": "Boolean",
+    "Offset": 194,
+    "Count": 1,
+    "Name": "PlayerCarInPitStall",
+    "Description": "Players car is properly in their pitstall",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "PlayerCarPitSvStatus": {
+    "Type": "Int32",
+    "Offset": 195,
+    "Count": 1,
+    "Name": "PlayerCarPitSvStatus",
+    "Description": "Players car pit service status bits",
+    "Unit": "irsdk_PitSvStatus",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerTireCompound": {
+    "Type": "Int32",
+    "Offset": 199,
+    "Count": 1,
+    "Name": "PlayerTireCompound",
+    "Description": "Players car current tire compound",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerFastRepairsUsed": {
+    "Type": "Int32",
+    "Offset": 203,
+    "Count": 1,
+    "Name": "PlayerFastRepairsUsed",
+    "Description": "Players car number of fast repairs used",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "CarIdxLap": {
+    "Type": "Int32",
+    "Offset": 207,
+    "Count": 64,
+    "Name": "CarIdxLap",
+    "Description": "Laps started by car index",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxLapCompleted": {
+    "Type": "Int32",
+    "Offset": 463,
+    "Count": 64,
+    "Name": "CarIdxLapCompleted",
+    "Description": "Laps completed by car index",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxLapDistPct": {
+    "Type": "Single",
+    "Offset": 719,
+    "Count": 64,
+    "Name": "CarIdxLapDistPct",
+    "Description": "Percentage distance around lap by car index",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxTrackSurface": {
+    "Type": "Int32",
+    "Offset": 975,
+    "Count": 64,
+    "Name": "CarIdxTrackSurface",
+    "Description": "Track surface type by car index",
+    "Unit": "irsdk_TrkLoc",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxTrackSurfaceMaterial": {
+    "Type": "Int32",
+    "Offset": 1231,
+    "Count": 64,
+    "Name": "CarIdxTrackSurfaceMaterial",
+    "Description": "Track surface material type by car index",
+    "Unit": "irsdk_TrkSurf",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxOnPitRoad": {
+    "Type": "Boolean",
+    "Offset": 1487,
+    "Count": 64,
+    "Name": "CarIdxOnPitRoad",
+    "Description": "On pit road between the cones by car index",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 64
+  },
+  "CarIdxPosition": {
+    "Type": "Int32",
+    "Offset": 1551,
+    "Count": 64,
+    "Name": "CarIdxPosition",
+    "Description": "Cars position in race by car index",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxClassPosition": {
+    "Type": "Int32",
+    "Offset": 1807,
+    "Count": 64,
+    "Name": "CarIdxClassPosition",
+    "Description": "Cars class position in race by car index",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxClass": {
+    "Type": "Int32",
+    "Offset": 2063,
+    "Count": 64,
+    "Name": "CarIdxClass",
+    "Description": "Cars class id by car index",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxF2Time": {
+    "Type": "Single",
+    "Offset": 2319,
+    "Count": 64,
+    "Name": "CarIdxF2Time",
+    "Description": "Race time behind leader or fastest lap time otherwise",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxEstTime": {
+    "Type": "Single",
+    "Offset": 2575,
+    "Count": 64,
+    "Name": "CarIdxEstTime",
+    "Description": "Estimated time to reach current location on track",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxLastLapTime": {
+    "Type": "Single",
+    "Offset": 2831,
+    "Count": 64,
+    "Name": "CarIdxLastLapTime",
+    "Description": "Cars last lap time",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxBestLapTime": {
+    "Type": "Single",
+    "Offset": 3087,
+    "Count": 64,
+    "Name": "CarIdxBestLapTime",
+    "Description": "Cars best lap time",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxBestLapNum": {
+    "Type": "Int32",
+    "Offset": 3343,
+    "Count": 64,
+    "Name": "CarIdxBestLapNum",
+    "Description": "Cars best lap number",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxTireCompound": {
+    "Type": "Int32",
+    "Offset": 3599,
+    "Count": 64,
+    "Name": "CarIdxTireCompound",
+    "Description": "Cars current tire compound",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxQualTireCompound": {
+    "Type": "Int32",
+    "Offset": 3855,
+    "Count": 64,
+    "Name": "CarIdxQualTireCompound",
+    "Description": "Cars Qual tire compound",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxQualTireCompoundLocked": {
+    "Type": "Boolean",
+    "Offset": 4111,
+    "Count": 64,
+    "Name": "CarIdxQualTireCompoundLocked",
+    "Description": "Cars Qual tire compound is locked-in",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 64
+  },
+  "CarIdxFastRepairsUsed": {
+    "Type": "Int32",
+    "Offset": 4175,
+    "Count": 64,
+    "Name": "CarIdxFastRepairsUsed",
+    "Description": "How many fast repairs each car has used",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxSessionFlags": {
+    "Type": "BitField",
+    "Offset": 4431,
+    "Count": 64,
+    "Name": "CarIdxSessionFlags",
+    "Description": "Session flags for each player",
+    "Unit": "irsdk_Flags",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "PaceMode": {
+    "Type": "Int32",
+    "Offset": 4687,
+    "Count": 1,
+    "Name": "PaceMode",
+    "Description": "Are we pacing or not",
+    "Unit": "irsdk_PaceMode",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "CarIdxPaceLine": {
+    "Type": "Int32",
+    "Offset": 4691,
+    "Count": 64,
+    "Name": "CarIdxPaceLine",
+    "Description": "What line cars are pacing in  or -1 if not pacing",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxPaceRow": {
+    "Type": "Int32",
+    "Offset": 4947,
+    "Count": 64,
+    "Name": "CarIdxPaceRow",
+    "Description": "What row cars are pacing in  or -1 if not pacing",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxPaceFlags": {
+    "Type": "BitField",
+    "Offset": 5203,
+    "Count": 64,
+    "Name": "CarIdxPaceFlags",
+    "Description": "Pacing status flags for each car",
+    "Unit": "irsdk_PaceFlags",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "OnPitRoad": {
+    "Type": "Boolean",
+    "Offset": 5459,
+    "Count": 1,
+    "Name": "OnPitRoad",
+    "Description": "Is the player car on pit road between the cones",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "CarIdxSteer": {
+    "Type": "Single",
+    "Offset": 5460,
+    "Count": 64,
+    "Name": "CarIdxSteer",
+    "Description": "Steering wheel angle by car index",
+    "Unit": "rad",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxRPM": {
+    "Type": "Single",
+    "Offset": 5716,
+    "Count": 64,
+    "Name": "CarIdxRPM",
+    "Description": "Engine rpm by car index",
+    "Unit": "revs/min",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "CarIdxGear": {
+    "Type": "Int32",
+    "Offset": 5972,
+    "Count": 64,
+    "Name": "CarIdxGear",
+    "Description": "-1=reverse  0=neutral  1..n=current gear by car index",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "SteeringWheelAngle": {
+    "Type": "Single",
+    "Offset": 6228,
+    "Count": 1,
+    "Name": "SteeringWheelAngle",
+    "Description": "Steering wheel angle",
+    "Unit": "rad",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "Throttle": {
+    "Type": "Single",
+    "Offset": 6232,
+    "Count": 1,
+    "Name": "Throttle",
+    "Description": "0=off throttle to 1=full throttle",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "Brake": {
+    "Type": "Single",
+    "Offset": 6236,
+    "Count": 1,
+    "Name": "Brake",
+    "Description": "0=brake released to 1=max pedal force",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "Clutch": {
+    "Type": "Single",
+    "Offset": 6240,
+    "Count": 1,
+    "Name": "Clutch",
+    "Description": "0=disengaged to 1=fully engaged",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "Gear": {
+    "Type": "Int32",
+    "Offset": 6244,
+    "Count": 1,
+    "Name": "Gear",
+    "Description": "-1=reverse  0=neutral  1..n=current gear",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RPM": {
+    "Type": "Single",
+    "Offset": 6248,
+    "Count": 1,
+    "Name": "RPM",
+    "Description": "Engine rpm",
+    "Unit": "revs/min",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarSLFirstRPM": {
+    "Type": "Single",
+    "Offset": 6252,
+    "Count": 1,
+    "Name": "PlayerCarSLFirstRPM",
+    "Description": "Shift light first light rpm",
+    "Unit": "revs/min",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarSLShiftRPM": {
+    "Type": "Single",
+    "Offset": 6256,
+    "Count": 1,
+    "Name": "PlayerCarSLShiftRPM",
+    "Description": "Shift light shift rpm",
+    "Unit": "revs/min",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarSLLastRPM": {
+    "Type": "Single",
+    "Offset": 6260,
+    "Count": 1,
+    "Name": "PlayerCarSLLastRPM",
+    "Description": "Shift light last light rpm",
+    "Unit": "revs/min",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PlayerCarSLBlinkRPM": {
+    "Type": "Single",
+    "Offset": 6264,
+    "Count": 1,
+    "Name": "PlayerCarSLBlinkRPM",
+    "Description": "Shift light blink rpm",
+    "Unit": "revs/min",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "Lap": {
+    "Type": "Int32",
+    "Offset": 6268,
+    "Count": 1,
+    "Name": "Lap",
+    "Description": "Laps started count",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapCompleted": {
+    "Type": "Int32",
+    "Offset": 6272,
+    "Count": 1,
+    "Name": "LapCompleted",
+    "Description": "Laps completed count",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapDist": {
+    "Type": "Single",
+    "Offset": 6276,
+    "Count": 1,
+    "Name": "LapDist",
+    "Description": "Meters traveled from S/F this lap",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapDistPct": {
+    "Type": "Single",
+    "Offset": 6280,
+    "Count": 1,
+    "Name": "LapDistPct",
+    "Description": "Percentage distance around lap",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RaceLaps": {
+    "Type": "Int32",
+    "Offset": 6284,
+    "Count": 1,
+    "Name": "RaceLaps",
+    "Description": "Laps completed in race",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapBestLap": {
+    "Type": "Int32",
+    "Offset": 6288,
+    "Count": 1,
+    "Name": "LapBestLap",
+    "Description": "Players best lap number",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapBestLapTime": {
+    "Type": "Single",
+    "Offset": 6292,
+    "Count": 1,
+    "Name": "LapBestLapTime",
+    "Description": "Players best lap time",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapLastLapTime": {
+    "Type": "Single",
+    "Offset": 6296,
+    "Count": 1,
+    "Name": "LapLastLapTime",
+    "Description": "Players last lap time",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapCurrentLapTime": {
+    "Type": "Single",
+    "Offset": 6300,
+    "Count": 1,
+    "Name": "LapCurrentLapTime",
+    "Description": "Estimate of players current lap time as shown in F3 box",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapLasNLapSeq": {
+    "Type": "Int32",
+    "Offset": 6304,
+    "Count": 1,
+    "Name": "LapLasNLapSeq",
+    "Description": "Player num consecutive clean laps completed for N average",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapLastNLapTime": {
+    "Type": "Single",
+    "Offset": 6308,
+    "Count": 1,
+    "Name": "LapLastNLapTime",
+    "Description": "Player last N average lap time",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapBestNLapLap": {
+    "Type": "Int32",
+    "Offset": 6312,
+    "Count": 1,
+    "Name": "LapBestNLapLap",
+    "Description": "Player last lap in best N average lap time",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapBestNLapTime": {
+    "Type": "Single",
+    "Offset": 6316,
+    "Count": 1,
+    "Name": "LapBestNLapTime",
+    "Description": "Player best N average lap time",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapDeltaToBestLap": {
+    "Type": "Single",
+    "Offset": 6320,
+    "Count": 1,
+    "Name": "LapDeltaToBestLap",
+    "Description": "Delta time for best lap",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapDeltaToBestLap_DD": {
+    "Type": "Single",
+    "Offset": 6324,
+    "Count": 1,
+    "Name": "LapDeltaToBestLap_DD",
+    "Description": "Rate of change of delta time for best lap",
+    "Unit": "s/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapDeltaToBestLap_OK": {
+    "Type": "Boolean",
+    "Offset": 6328,
+    "Count": 1,
+    "Name": "LapDeltaToBestLap_OK",
+    "Description": "Delta time for best lap is valid",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "LapDeltaToOptimalLap": {
+    "Type": "Single",
+    "Offset": 6329,
+    "Count": 1,
+    "Name": "LapDeltaToOptimalLap",
+    "Description": "Delta time for optimal lap",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapDeltaToOptimalLap_DD": {
+    "Type": "Single",
+    "Offset": 6333,
+    "Count": 1,
+    "Name": "LapDeltaToOptimalLap_DD",
+    "Description": "Rate of change of delta time for optimal lap",
+    "Unit": "s/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapDeltaToOptimalLap_OK": {
+    "Type": "Boolean",
+    "Offset": 6337,
+    "Count": 1,
+    "Name": "LapDeltaToOptimalLap_OK",
+    "Description": "Delta time for optimal lap is valid",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "LapDeltaToSessionBestLap": {
+    "Type": "Single",
+    "Offset": 6338,
+    "Count": 1,
+    "Name": "LapDeltaToSessionBestLap",
+    "Description": "Delta time for session best lap",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapDeltaToSessionBestLap_DD": {
+    "Type": "Single",
+    "Offset": 6342,
+    "Count": 1,
+    "Name": "LapDeltaToSessionBestLap_DD",
+    "Description": "Rate of change of delta time for session best lap",
+    "Unit": "s/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapDeltaToSessionBestLap_OK": {
+    "Type": "Boolean",
+    "Offset": 6346,
+    "Count": 1,
+    "Name": "LapDeltaToSessionBestLap_OK",
+    "Description": "Delta time for session best lap is valid",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "LapDeltaToSessionOptimalLap": {
+    "Type": "Single",
+    "Offset": 6347,
+    "Count": 1,
+    "Name": "LapDeltaToSessionOptimalLap",
+    "Description": "Delta time for session optimal lap",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapDeltaToSessionOptimalLap_DD": {
+    "Type": "Single",
+    "Offset": 6351,
+    "Count": 1,
+    "Name": "LapDeltaToSessionOptimalLap_DD",
+    "Description": "Rate of change of delta time for session optimal lap",
+    "Unit": "s/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapDeltaToSessionOptimalLap_OK": {
+    "Type": "Boolean",
+    "Offset": 6355,
+    "Count": 1,
+    "Name": "LapDeltaToSessionOptimalLap_OK",
+    "Description": "Delta time for session optimal lap is valid",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "LapDeltaToSessionLastlLap": {
+    "Type": "Single",
+    "Offset": 6356,
+    "Count": 1,
+    "Name": "LapDeltaToSessionLastlLap",
+    "Description": "Delta time for session last lap",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapDeltaToSessionLastlLap_DD": {
+    "Type": "Single",
+    "Offset": 6360,
+    "Count": 1,
+    "Name": "LapDeltaToSessionLastlLap_DD",
+    "Description": "Rate of change of delta time for session last lap",
+    "Unit": "s/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LapDeltaToSessionLastlLap_OK": {
+    "Type": "Boolean",
+    "Offset": 6364,
+    "Count": 1,
+    "Name": "LapDeltaToSessionLastlLap_OK",
+    "Description": "Delta time for session last lap is valid",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "Speed": {
+    "Type": "Single",
+    "Offset": 6365,
+    "Count": 1,
+    "Name": "Speed",
+    "Description": "GPS vehicle speed",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "Yaw": {
+    "Type": "Single",
+    "Offset": 6369,
+    "Count": 1,
+    "Name": "Yaw",
+    "Description": "Yaw orientation",
+    "Unit": "rad",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "YawNorth": {
+    "Type": "Single",
+    "Offset": 6373,
+    "Count": 1,
+    "Name": "YawNorth",
+    "Description": "Yaw orientation relative to north",
+    "Unit": "rad",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "Pitch": {
+    "Type": "Single",
+    "Offset": 6377,
+    "Count": 1,
+    "Name": "Pitch",
+    "Description": "Pitch orientation",
+    "Unit": "rad",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "Roll": {
+    "Type": "Single",
+    "Offset": 6381,
+    "Count": 1,
+    "Name": "Roll",
+    "Description": "Roll orientation",
+    "Unit": "rad",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "EnterExitReset": {
+    "Type": "Int32",
+    "Offset": 6385,
+    "Count": 1,
+    "Name": "EnterExitReset",
+    "Description": "Indicate action the reset key will take 0 enter 1 exit 2 reset",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "TrackTemp": {
+    "Type": "Single",
+    "Offset": 6389,
+    "Count": 1,
+    "Name": "TrackTemp",
+    "Description": "Deprecated  set to TrackTempCrew",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "TrackTempCrew": {
+    "Type": "Single",
+    "Offset": 6393,
+    "Count": 1,
+    "Name": "TrackTempCrew",
+    "Description": "Temperature of track measured by crew around track",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "AirTemp": {
+    "Type": "Single",
+    "Offset": 6397,
+    "Count": 1,
+    "Name": "AirTemp",
+    "Description": "Temperature of air at start/finish line",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "TrackWetness": {
+    "Type": "Int32",
+    "Offset": 6401,
+    "Count": 1,
+    "Name": "TrackWetness",
+    "Description": "How wet is the average track surface",
+    "Unit": "irsdk_TrackWetness",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "Skies": {
+    "Type": "Int32",
+    "Offset": 6405,
+    "Count": 1,
+    "Name": "Skies",
+    "Description": "Skies (0=clear/1=p cloudy/2=m cloudy/3=overcast)",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "AirDensity": {
+    "Type": "Single",
+    "Offset": 6409,
+    "Count": 1,
+    "Name": "AirDensity",
+    "Description": "Density of air at start/finish line",
+    "Unit": "kg/m^3",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "AirPressure": {
+    "Type": "Single",
+    "Offset": 6413,
+    "Count": 1,
+    "Name": "AirPressure",
+    "Description": "Pressure of air at start/finish line",
+    "Unit": "Pa",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "WindVel": {
+    "Type": "Single",
+    "Offset": 6417,
+    "Count": 1,
+    "Name": "WindVel",
+    "Description": "Wind velocity at start/finish line",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "WindDir": {
+    "Type": "Single",
+    "Offset": 6421,
+    "Count": 1,
+    "Name": "WindDir",
+    "Description": "Wind direction at start/finish line",
+    "Unit": "rad",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RelativeHumidity": {
+    "Type": "Single",
+    "Offset": 6425,
+    "Count": 1,
+    "Name": "RelativeHumidity",
+    "Description": "Relative Humidity at start/finish line",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "FogLevel": {
+    "Type": "Single",
+    "Offset": 6429,
+    "Count": 1,
+    "Name": "FogLevel",
+    "Description": "Fog level at start/finish line",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "Precipitation": {
+    "Type": "Single",
+    "Offset": 6433,
+    "Count": 1,
+    "Name": "Precipitation",
+    "Description": "Precipitation at start/finish line",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SolarAltitude": {
+    "Type": "Single",
+    "Offset": 6437,
+    "Count": 1,
+    "Name": "SolarAltitude",
+    "Description": "Sun angle above horizon in radians",
+    "Unit": "rad",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SolarAzimuth": {
+    "Type": "Single",
+    "Offset": 6441,
+    "Count": 1,
+    "Name": "SolarAzimuth",
+    "Description": "Sun angle clockwise from north in radians",
+    "Unit": "rad",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "WeatherDeclaredWet": {
+    "Type": "Boolean",
+    "Offset": 6445,
+    "Count": 1,
+    "Name": "WeatherDeclaredWet",
+    "Description": "The steward says rain tires can be used",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "DCLapStatus": {
+    "Type": "Int32",
+    "Offset": 6446,
+    "Count": 1,
+    "Name": "DCLapStatus",
+    "Description": "Status of driver change lap requirements",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "DCDriversSoFar": {
+    "Type": "Int32",
+    "Offset": 6450,
+    "Count": 1,
+    "Name": "DCDriversSoFar",
+    "Description": "Number of team drivers who have run a stint",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "OkToReloadTextures": {
+    "Type": "Boolean",
+    "Offset": 6454,
+    "Count": 1,
+    "Name": "OkToReloadTextures",
+    "Description": "True if it is ok to reload car textures at this time",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "LoadNumTextures": {
+    "Type": "Boolean",
+    "Offset": 6455,
+    "Count": 1,
+    "Name": "LoadNumTextures",
+    "Description": "True if the car_num texture will be loaded",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "CarLeftRight": {
+    "Type": "Int32",
+    "Offset": 6456,
+    "Count": 1,
+    "Name": "CarLeftRight",
+    "Description": "Notify if car is to the left or right of driver",
+    "Unit": "irsdk_CarLeftRight",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PitsOpen": {
+    "Type": "Boolean",
+    "Offset": 6460,
+    "Count": 1,
+    "Name": "PitsOpen",
+    "Description": "True if pit stop is allowed for the current player",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "VidCapEnabled": {
+    "Type": "Boolean",
+    "Offset": 6461,
+    "Count": 1,
+    "Name": "VidCapEnabled",
+    "Description": "True if video capture system is enabled",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "VidCapActive": {
+    "Type": "Boolean",
+    "Offset": 6462,
+    "Count": 1,
+    "Name": "VidCapActive",
+    "Description": "True if video currently being captured",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "PitRepairLeft": {
+    "Type": "Single",
+    "Offset": 6463,
+    "Count": 1,
+    "Name": "PitRepairLeft",
+    "Description": "Time left for mandatory pit repairs if repairs are active",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PitOptRepairLeft": {
+    "Type": "Single",
+    "Offset": 6467,
+    "Count": 1,
+    "Name": "PitOptRepairLeft",
+    "Description": "Time left for optional repairs if repairs are active",
+    "Unit": "s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PitstopActive": {
+    "Type": "Boolean",
+    "Offset": 6471,
+    "Count": 1,
+    "Name": "PitstopActive",
+    "Description": "Is the player getting pit stop service",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "FastRepairUsed": {
+    "Type": "Int32",
+    "Offset": 6472,
+    "Count": 1,
+    "Name": "FastRepairUsed",
+    "Description": "How many fast repairs used so far",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "FastRepairAvailable": {
+    "Type": "Int32",
+    "Offset": 6476,
+    "Count": 1,
+    "Name": "FastRepairAvailable",
+    "Description": "How many fast repairs left  255 is unlimited",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LFTiresUsed": {
+    "Type": "Int32",
+    "Offset": 6480,
+    "Count": 1,
+    "Name": "LFTiresUsed",
+    "Description": "How many left front tires used so far",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RFTiresUsed": {
+    "Type": "Int32",
+    "Offset": 6484,
+    "Count": 1,
+    "Name": "RFTiresUsed",
+    "Description": "How many right front tires used so far",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LRTiresUsed": {
+    "Type": "Int32",
+    "Offset": 6488,
+    "Count": 1,
+    "Name": "LRTiresUsed",
+    "Description": "How many left rear tires used so far",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RRTiresUsed": {
+    "Type": "Int32",
+    "Offset": 6492,
+    "Count": 1,
+    "Name": "RRTiresUsed",
+    "Description": "How many right rear tires used so far",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LeftTireSetsUsed": {
+    "Type": "Int32",
+    "Offset": 6496,
+    "Count": 1,
+    "Name": "LeftTireSetsUsed",
+    "Description": "How many left tire sets used so far",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RightTireSetsUsed": {
+    "Type": "Int32",
+    "Offset": 6500,
+    "Count": 1,
+    "Name": "RightTireSetsUsed",
+    "Description": "How many right tire sets used so far",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "FrontTireSetsUsed": {
+    "Type": "Int32",
+    "Offset": 6504,
+    "Count": 1,
+    "Name": "FrontTireSetsUsed",
+    "Description": "How many front tire sets used so far",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RearTireSetsUsed": {
+    "Type": "Int32",
+    "Offset": 6508,
+    "Count": 1,
+    "Name": "RearTireSetsUsed",
+    "Description": "How many rear tire sets used so far",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "TireSetsUsed": {
+    "Type": "Int32",
+    "Offset": 6512,
+    "Count": 1,
+    "Name": "TireSetsUsed",
+    "Description": "How many tire sets used so far",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LFTiresAvailable": {
+    "Type": "Int32",
+    "Offset": 6516,
+    "Count": 1,
+    "Name": "LFTiresAvailable",
+    "Description": "How many left front tires are remaining  255 is unlimited",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RFTiresAvailable": {
+    "Type": "Int32",
+    "Offset": 6520,
+    "Count": 1,
+    "Name": "RFTiresAvailable",
+    "Description": "How many right front tires are remaining  255 is unlimited",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LRTiresAvailable": {
+    "Type": "Int32",
+    "Offset": 6524,
+    "Count": 1,
+    "Name": "LRTiresAvailable",
+    "Description": "How many left rear tires are remaining  255 is unlimited",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RRTiresAvailable": {
+    "Type": "Int32",
+    "Offset": 6528,
+    "Count": 1,
+    "Name": "RRTiresAvailable",
+    "Description": "How many right rear tires are remaining  255 is unlimited",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LeftTireSetsAvailable": {
+    "Type": "Int32",
+    "Offset": 6532,
+    "Count": 1,
+    "Name": "LeftTireSetsAvailable",
+    "Description": "How many left tire sets are remaining  255 is unlimited",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RightTireSetsAvailable": {
+    "Type": "Int32",
+    "Offset": 6536,
+    "Count": 1,
+    "Name": "RightTireSetsAvailable",
+    "Description": "How many right tire sets are remaining  255 is unlimited",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "FrontTireSetsAvailable": {
+    "Type": "Int32",
+    "Offset": 6540,
+    "Count": 1,
+    "Name": "FrontTireSetsAvailable",
+    "Description": "How many front tire sets are remaining  255 is unlimited",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RearTireSetsAvailable": {
+    "Type": "Int32",
+    "Offset": 6544,
+    "Count": 1,
+    "Name": "RearTireSetsAvailable",
+    "Description": "How many rear tire sets are remaining  255 is unlimited",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "TireSetsAvailable": {
+    "Type": "Int32",
+    "Offset": 6548,
+    "Count": 1,
+    "Name": "TireSetsAvailable",
+    "Description": "How many tire sets are remaining  255 is unlimited",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "CamCarIdx": {
+    "Type": "Int32",
+    "Offset": 6552,
+    "Count": 1,
+    "Name": "CamCarIdx",
+    "Description": "Active camera\u0027s focus car index",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "CamCameraNumber": {
+    "Type": "Int32",
+    "Offset": 6556,
+    "Count": 1,
+    "Name": "CamCameraNumber",
+    "Description": "Active camera number",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "CamGroupNumber": {
+    "Type": "Int32",
+    "Offset": 6560,
+    "Count": 1,
+    "Name": "CamGroupNumber",
+    "Description": "Active camera group number",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "CamCameraState": {
+    "Type": "BitField",
+    "Offset": 6564,
+    "Count": 1,
+    "Name": "CamCameraState",
+    "Description": "State of camera system",
+    "Unit": "irsdk_CameraState",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "IsOnTrackCar": {
+    "Type": "Boolean",
+    "Offset": 6568,
+    "Count": 1,
+    "Name": "IsOnTrackCar",
+    "Description": "1=Car on track physics running",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "IsInGarage": {
+    "Type": "Boolean",
+    "Offset": 6569,
+    "Count": 1,
+    "Name": "IsInGarage",
+    "Description": "1=Car in garage physics running",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "SteeringWheelAngleMax": {
+    "Type": "Single",
+    "Offset": 6570,
+    "Count": 1,
+    "Name": "SteeringWheelAngleMax",
+    "Description": "Steering wheel max angle",
+    "Unit": "rad",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ShiftPowerPct": {
+    "Type": "Single",
+    "Offset": 6574,
+    "Count": 1,
+    "Name": "ShiftPowerPct",
+    "Description": "Friction torque applied to gears when shifting or grinding",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ShiftGrindRPM": {
+    "Type": "Single",
+    "Offset": 6578,
+    "Count": 1,
+    "Name": "ShiftGrindRPM",
+    "Description": "RPM of shifter grinding noise",
+    "Unit": "RPM",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ThrottleRaw": {
+    "Type": "Single",
+    "Offset": 6582,
+    "Count": 1,
+    "Name": "ThrottleRaw",
+    "Description": "Raw throttle input 0=off throttle to 1=full throttle",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "BrakeRaw": {
+    "Type": "Single",
+    "Offset": 6586,
+    "Count": 1,
+    "Name": "BrakeRaw",
+    "Description": "Raw brake input 0=brake released to 1=max pedal force",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ClutchRaw": {
+    "Type": "Single",
+    "Offset": 6590,
+    "Count": 1,
+    "Name": "ClutchRaw",
+    "Description": "Raw clutch input 0=disengaged to 1=fully engaged",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "HandbrakeRaw": {
+    "Type": "Single",
+    "Offset": 6594,
+    "Count": 1,
+    "Name": "HandbrakeRaw",
+    "Description": "Raw handbrake input 0=handbrake released to 1=max force",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "BrakeABSactive": {
+    "Type": "Boolean",
+    "Offset": 6598,
+    "Count": 1,
+    "Name": "BrakeABSactive",
+    "Description": "true if abs is currently reducing brake force pressure",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "EngineWarnings": {
+    "Type": "BitField",
+    "Offset": 6599,
+    "Count": 1,
+    "Name": "EngineWarnings",
+    "Description": "Bitfield for warning lights",
+    "Unit": "irsdk_EngineWarnings",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "FuelLevelPct": {
+    "Type": "Single",
+    "Offset": 6603,
+    "Count": 1,
+    "Name": "FuelLevelPct",
+    "Description": "Percent fuel remaining",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PitSvFlags": {
+    "Type": "BitField",
+    "Offset": 6607,
+    "Count": 1,
+    "Name": "PitSvFlags",
+    "Description": "Bitfield of pit service checkboxes",
+    "Unit": "irsdk_PitSvFlags",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PitSvLFP": {
+    "Type": "Single",
+    "Offset": 6611,
+    "Count": 1,
+    "Name": "PitSvLFP",
+    "Description": "Pit service left front tire pressure",
+    "Unit": "kPa",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PitSvRFP": {
+    "Type": "Single",
+    "Offset": 6615,
+    "Count": 1,
+    "Name": "PitSvRFP",
+    "Description": "Pit service right front tire pressure",
+    "Unit": "kPa",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PitSvLRP": {
+    "Type": "Single",
+    "Offset": 6619,
+    "Count": 1,
+    "Name": "PitSvLRP",
+    "Description": "Pit service left rear tire pressure",
+    "Unit": "kPa",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PitSvRRP": {
+    "Type": "Single",
+    "Offset": 6623,
+    "Count": 1,
+    "Name": "PitSvRRP",
+    "Description": "Pit service right rear tire pressure",
+    "Unit": "kPa",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PitSvFuel": {
+    "Type": "Single",
+    "Offset": 6627,
+    "Count": 1,
+    "Name": "PitSvFuel",
+    "Description": "Pit service fuel add amount",
+    "Unit": "l or kWh",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PitSvTireCompound": {
+    "Type": "Int32",
+    "Offset": 6631,
+    "Count": 1,
+    "Name": "PitSvTireCompound",
+    "Description": "Pit service pending tire compound",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "CarIdxP2P_Status": {
+    "Type": "Boolean",
+    "Offset": 6635,
+    "Count": 64,
+    "Name": "CarIdxP2P_Status",
+    "Description": "Push2Pass active or not",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 64
+  },
+  "CarIdxP2P_Count": {
+    "Type": "Int32",
+    "Offset": 6699,
+    "Count": 64,
+    "Name": "CarIdxP2P_Count",
+    "Description": "Push2Pass count of usage (or remaining in Race)",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 256
+  },
+  "SteeringWheelPctTorque": {
+    "Type": "Single",
+    "Offset": 6955,
+    "Count": 1,
+    "Name": "SteeringWheelPctTorque",
+    "Description": "Force feedback % max torque on steering shaft unsigned",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SteeringWheelPctTorqueSign": {
+    "Type": "Single",
+    "Offset": 6959,
+    "Count": 1,
+    "Name": "SteeringWheelPctTorqueSign",
+    "Description": "Force feedback % max torque on steering shaft signed",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SteeringWheelPctTorqueSignStops": {
+    "Type": "Single",
+    "Offset": 6963,
+    "Count": 1,
+    "Name": "SteeringWheelPctTorqueSignStops",
+    "Description": "Force feedback % max torque on steering shaft signed stops",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SteeringWheelPctIntensity": {
+    "Type": "Single",
+    "Offset": 6967,
+    "Count": 1,
+    "Name": "SteeringWheelPctIntensity",
+    "Description": "Force feedback % max intensity",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SteeringWheelPctSmoothing": {
+    "Type": "Single",
+    "Offset": 6971,
+    "Count": 1,
+    "Name": "SteeringWheelPctSmoothing",
+    "Description": "Force feedback % max smoothing",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SteeringWheelPctDamper": {
+    "Type": "Single",
+    "Offset": 6975,
+    "Count": 1,
+    "Name": "SteeringWheelPctDamper",
+    "Description": "Force feedback % max damping",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SteeringWheelLimiter": {
+    "Type": "Single",
+    "Offset": 6979,
+    "Count": 1,
+    "Name": "SteeringWheelLimiter",
+    "Description": "Force feedback limiter strength limits impacts and oscillation",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SteeringWheelMaxForceNm": {
+    "Type": "Single",
+    "Offset": 6983,
+    "Count": 1,
+    "Name": "SteeringWheelMaxForceNm",
+    "Description": "Value of strength or max force slider in Nm for FFB",
+    "Unit": "N*m",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SteeringWheelPeakForceNm": {
+    "Type": "Single",
+    "Offset": 6987,
+    "Count": 1,
+    "Name": "SteeringWheelPeakForceNm",
+    "Description": "Peak torque mapping to direct input units for FFB",
+    "Unit": "N*m",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "SteeringWheelUseLinear": {
+    "Type": "Boolean",
+    "Offset": 6991,
+    "Count": 1,
+    "Name": "SteeringWheelUseLinear",
+    "Description": "True if steering wheel force is using linear mode",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "ShiftIndicatorPct": {
+    "Type": "Single",
+    "Offset": 6992,
+    "Count": 1,
+    "Name": "ShiftIndicatorPct",
+    "Description": "DEPRECATED use DriverCarSLBlinkRPM instead",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ReplayPlaySpeed": {
+    "Type": "Int32",
+    "Offset": 6996,
+    "Count": 1,
+    "Name": "ReplayPlaySpeed",
+    "Description": "Replay playback speed",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ReplayPlaySlowMotion": {
+    "Type": "Boolean",
+    "Offset": 7000,
+    "Count": 1,
+    "Name": "ReplayPlaySlowMotion",
+    "Description": "0=not slow motion  1=replay is in slow motion",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "ReplaySessionTime": {
+    "Type": "Double",
+    "Offset": 7001,
+    "Count": 1,
+    "Name": "ReplaySessionTime",
+    "Description": "Seconds since replay session start",
+    "Unit": "s",
+    "Bytes": 8,
+    "Length": 8
+  },
+  "ReplaySessionNum": {
+    "Type": "Int32",
+    "Offset": 7009,
+    "Count": 1,
+    "Name": "ReplaySessionNum",
+    "Description": "Replay session number",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "TireLF_RumblePitch": {
+    "Type": "Single",
+    "Offset": 7013,
+    "Count": 1,
+    "Name": "TireLF_RumblePitch",
+    "Description": "Players LF Tire Sound rumblestrip pitch",
+    "Unit": "Hz",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "TireRF_RumblePitch": {
+    "Type": "Single",
+    "Offset": 7017,
+    "Count": 1,
+    "Name": "TireRF_RumblePitch",
+    "Description": "Players RF Tire Sound rumblestrip pitch",
+    "Unit": "Hz",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "TireLR_RumblePitch": {
+    "Type": "Single",
+    "Offset": 7021,
+    "Count": 1,
+    "Name": "TireLR_RumblePitch",
+    "Description": "Players LR Tire Sound rumblestrip pitch",
+    "Unit": "Hz",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "TireRR_RumblePitch": {
+    "Type": "Single",
+    "Offset": 7025,
+    "Count": 1,
+    "Name": "TireRR_RumblePitch",
+    "Description": "Players RR Tire Sound rumblestrip pitch",
+    "Unit": "Hz",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "IsGarageVisible": {
+    "Type": "Boolean",
+    "Offset": 7029,
+    "Count": 1,
+    "Name": "IsGarageVisible",
+    "Description": "1=Garage screen is visible",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "SteeringWheelTorque_ST": {
+    "Type": "Single",
+    "Offset": 7030,
+    "Count": 6,
+    "Name": "SteeringWheelTorque_ST",
+    "Description": "Output torque on steering shaft at 360 Hz",
+    "Unit": "N*m",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "SteeringWheelTorque": {
+    "Type": "Single",
+    "Offset": 7054,
+    "Count": 1,
+    "Name": "SteeringWheelTorque",
+    "Description": "Output torque on steering shaft",
+    "Unit": "N*m",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "VelocityZ_ST": {
+    "Type": "Single",
+    "Offset": 7058,
+    "Count": 6,
+    "Name": "VelocityZ_ST",
+    "Description": "Z velocity",
+    "Unit": "m/s at 360 Hz",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "VelocityY_ST": {
+    "Type": "Single",
+    "Offset": 7082,
+    "Count": 6,
+    "Name": "VelocityY_ST",
+    "Description": "Y velocity",
+    "Unit": "m/s at 360 Hz",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "VelocityX_ST": {
+    "Type": "Single",
+    "Offset": 7106,
+    "Count": 6,
+    "Name": "VelocityX_ST",
+    "Description": "X velocity",
+    "Unit": "m/s at 360 Hz",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "VelocityZ": {
+    "Type": "Single",
+    "Offset": 7130,
+    "Count": 1,
+    "Name": "VelocityZ",
+    "Description": "Z velocity",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "VelocityY": {
+    "Type": "Single",
+    "Offset": 7134,
+    "Count": 1,
+    "Name": "VelocityY",
+    "Description": "Y velocity",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "VelocityX": {
+    "Type": "Single",
+    "Offset": 7138,
+    "Count": 1,
+    "Name": "VelocityX",
+    "Description": "X velocity",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "YawRate_ST": {
+    "Type": "Single",
+    "Offset": 7142,
+    "Count": 6,
+    "Name": "YawRate_ST",
+    "Description": "Yaw rate at 360 Hz",
+    "Unit": "rad/s",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "PitchRate_ST": {
+    "Type": "Single",
+    "Offset": 7166,
+    "Count": 6,
+    "Name": "PitchRate_ST",
+    "Description": "Pitch rate at 360 Hz",
+    "Unit": "rad/s",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "RollRate_ST": {
+    "Type": "Single",
+    "Offset": 7190,
+    "Count": 6,
+    "Name": "RollRate_ST",
+    "Description": "Roll rate at 360 Hz",
+    "Unit": "rad/s",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "YawRate": {
+    "Type": "Single",
+    "Offset": 7214,
+    "Count": 1,
+    "Name": "YawRate",
+    "Description": "Yaw rate",
+    "Unit": "rad/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PitchRate": {
+    "Type": "Single",
+    "Offset": 7218,
+    "Count": 1,
+    "Name": "PitchRate",
+    "Description": "Pitch rate",
+    "Unit": "rad/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RollRate": {
+    "Type": "Single",
+    "Offset": 7222,
+    "Count": 1,
+    "Name": "RollRate",
+    "Description": "Roll rate",
+    "Unit": "rad/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "VertAccel_ST": {
+    "Type": "Single",
+    "Offset": 7226,
+    "Count": 6,
+    "Name": "VertAccel_ST",
+    "Description": "Vertical acceleration (including gravity) at 360 Hz",
+    "Unit": "m/s^2",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "LatAccel_ST": {
+    "Type": "Single",
+    "Offset": 7250,
+    "Count": 6,
+    "Name": "LatAccel_ST",
+    "Description": "Lateral acceleration (including gravity) at 360 Hz",
+    "Unit": "m/s^2",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "LongAccel_ST": {
+    "Type": "Single",
+    "Offset": 7274,
+    "Count": 6,
+    "Name": "LongAccel_ST",
+    "Description": "Longitudinal acceleration (including gravity) at 360 Hz",
+    "Unit": "m/s^2",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "VertAccel": {
+    "Type": "Single",
+    "Offset": 7298,
+    "Count": 1,
+    "Name": "VertAccel",
+    "Description": "Vertical acceleration (including gravity)",
+    "Unit": "m/s^2",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LatAccel": {
+    "Type": "Single",
+    "Offset": 7302,
+    "Count": 1,
+    "Name": "LatAccel",
+    "Description": "Lateral acceleration (including gravity)",
+    "Unit": "m/s^2",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LongAccel": {
+    "Type": "Single",
+    "Offset": 7306,
+    "Count": 1,
+    "Name": "LongAccel",
+    "Description": "Longitudinal acceleration (including gravity)",
+    "Unit": "m/s^2",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dcStarter": {
+    "Type": "Boolean",
+    "Offset": 7310,
+    "Count": 1,
+    "Name": "dcStarter",
+    "Description": "In car trigger car starter",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "dcPitSpeedLimiterToggle": {
+    "Type": "Boolean",
+    "Offset": 7311,
+    "Count": 1,
+    "Name": "dcPitSpeedLimiterToggle",
+    "Description": "In car traction control active",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "dcTractionControlToggle": {
+    "Type": "Boolean",
+    "Offset": 7312,
+    "Count": 1,
+    "Name": "dcTractionControlToggle",
+    "Description": "In car traction control active",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "dcHeadlightFlash": {
+    "Type": "Boolean",
+    "Offset": 7313,
+    "Count": 1,
+    "Name": "dcHeadlightFlash",
+    "Description": "In car headlight flash control active",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "dcLowFuelAccept": {
+    "Type": "Boolean",
+    "Offset": 7314,
+    "Count": 1,
+    "Name": "dcLowFuelAccept",
+    "Description": "In car low fuel accept",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "dpWindshieldTearoff": {
+    "Type": "Single",
+    "Offset": 7315,
+    "Count": 1,
+    "Name": "dpWindshieldTearoff",
+    "Description": "Pitstop windshield tearoff",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dcToggleWindshieldWipers": {
+    "Type": "Boolean",
+    "Offset": 7319,
+    "Count": 1,
+    "Name": "dcToggleWindshieldWipers",
+    "Description": "In car turn wipers on or off",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "dcTriggerWindshieldWipers": {
+    "Type": "Boolean",
+    "Offset": 7320,
+    "Count": 1,
+    "Name": "dcTriggerWindshieldWipers",
+    "Description": "In car momentarily turn on wipers",
+    "Unit": "",
+    "Bytes": 1,
+    "Length": 1
+  },
+  "dpRFTireChange": {
+    "Type": "Single",
+    "Offset": 7321,
+    "Count": 1,
+    "Name": "dpRFTireChange",
+    "Description": "Pitstop rf tire change request",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dpLFTireChange": {
+    "Type": "Single",
+    "Offset": 7325,
+    "Count": 1,
+    "Name": "dpLFTireChange",
+    "Description": "Pitstop lf tire change request",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dpRRTireChange": {
+    "Type": "Single",
+    "Offset": 7329,
+    "Count": 1,
+    "Name": "dpRRTireChange",
+    "Description": "Pitstop rr tire change request",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dpLRTireChange": {
+    "Type": "Single",
+    "Offset": 7333,
+    "Count": 1,
+    "Name": "dpLRTireChange",
+    "Description": "Pitstop lr tire change request",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dpFuelFill": {
+    "Type": "Single",
+    "Offset": 7337,
+    "Count": 1,
+    "Name": "dpFuelFill",
+    "Description": "Pitstop fuel fill flag",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dpFuelAddKg": {
+    "Type": "Single",
+    "Offset": 7341,
+    "Count": 1,
+    "Name": "dpFuelAddKg",
+    "Description": "Pitstop fuel add amount",
+    "Unit": "kg",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dpFastRepair": {
+    "Type": "Single",
+    "Offset": 7345,
+    "Count": 1,
+    "Name": "dpFastRepair",
+    "Description": "Pitstop fast repair set",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dcAntiRollFront": {
+    "Type": "Single",
+    "Offset": 7349,
+    "Count": 1,
+    "Name": "dcAntiRollFront",
+    "Description": "In car front anti roll bar adjustment",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dcAntiRollRear": {
+    "Type": "Single",
+    "Offset": 7353,
+    "Count": 1,
+    "Name": "dcAntiRollRear",
+    "Description": "In car rear anti roll bar adjustment",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dcBrakeBias": {
+    "Type": "Single",
+    "Offset": 7357,
+    "Count": 1,
+    "Name": "dcBrakeBias",
+    "Description": "In car brake bias adjustment",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dpLFTireColdPress": {
+    "Type": "Single",
+    "Offset": 7361,
+    "Count": 1,
+    "Name": "dpLFTireColdPress",
+    "Description": "Pitstop lf tire cold pressure adjustment",
+    "Unit": "Pa",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dpRFTireColdPress": {
+    "Type": "Single",
+    "Offset": 7365,
+    "Count": 1,
+    "Name": "dpRFTireColdPress",
+    "Description": "Pitstop rf cold tire pressure adjustment",
+    "Unit": "Pa",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dpLRTireColdPress": {
+    "Type": "Single",
+    "Offset": 7369,
+    "Count": 1,
+    "Name": "dpLRTireColdPress",
+    "Description": "Pitstop lr tire cold pressure adjustment",
+    "Unit": "Pa",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dpRRTireColdPress": {
+    "Type": "Single",
+    "Offset": 7373,
+    "Count": 1,
+    "Name": "dpRRTireColdPress",
+    "Description": "Pitstop rr cold tire pressure adjustment",
+    "Unit": "Pa",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dcMGUKDeployMode": {
+    "Type": "Single",
+    "Offset": 7377,
+    "Count": 1,
+    "Name": "dcMGUKDeployMode",
+    "Description": "In car MGU-K deployment mode level adjustment",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dcTractionControl2": {
+    "Type": "Single",
+    "Offset": 7381,
+    "Count": 1,
+    "Name": "dcTractionControl2",
+    "Description": "In car traction control 2 adjustment",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dcTractionControl": {
+    "Type": "Single",
+    "Offset": 7385,
+    "Count": 1,
+    "Name": "dcTractionControl",
+    "Description": "In car traction control adjustment",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dpFuelAutoFillEnabled": {
+    "Type": "Single",
+    "Offset": 7389,
+    "Count": 1,
+    "Name": "dpFuelAutoFillEnabled",
+    "Description": "Pitstop auto fill fuel system enabled",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "dpFuelAutoFillActive": {
+    "Type": "Single",
+    "Offset": 7393,
+    "Count": 1,
+    "Name": "dpFuelAutoFillActive",
+    "Description": "Pitstop auto fill fuel next stop flag",
+    "Unit": "",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RFbrakeLinePress": {
+    "Type": "Single",
+    "Offset": 7397,
+    "Count": 1,
+    "Name": "RFbrakeLinePress",
+    "Description": "RF brake line pressure",
+    "Unit": "bar",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RFcoldPressure": {
+    "Type": "Single",
+    "Offset": 7401,
+    "Count": 1,
+    "Name": "RFcoldPressure",
+    "Description": "RF tire cold pressure  as set in the garage",
+    "Unit": "kPa",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RFtempCL": {
+    "Type": "Single",
+    "Offset": 7405,
+    "Count": 1,
+    "Name": "RFtempCL",
+    "Description": "RF tire left carcass temperature",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RFtempCM": {
+    "Type": "Single",
+    "Offset": 7409,
+    "Count": 1,
+    "Name": "RFtempCM",
+    "Description": "RF tire middle carcass temperature",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RFtempCR": {
+    "Type": "Single",
+    "Offset": 7413,
+    "Count": 1,
+    "Name": "RFtempCR",
+    "Description": "RF tire right carcass temperature",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RFwearL": {
+    "Type": "Single",
+    "Offset": 7417,
+    "Count": 1,
+    "Name": "RFwearL",
+    "Description": "RF tire left percent tread remaining",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RFwearM": {
+    "Type": "Single",
+    "Offset": 7421,
+    "Count": 1,
+    "Name": "RFwearM",
+    "Description": "RF tire middle percent tread remaining",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RFwearR": {
+    "Type": "Single",
+    "Offset": 7425,
+    "Count": 1,
+    "Name": "RFwearR",
+    "Description": "RF tire right percent tread remaining",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LFbrakeLinePress": {
+    "Type": "Single",
+    "Offset": 7429,
+    "Count": 1,
+    "Name": "LFbrakeLinePress",
+    "Description": "LF brake line pressure",
+    "Unit": "bar",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LFcoldPressure": {
+    "Type": "Single",
+    "Offset": 7433,
+    "Count": 1,
+    "Name": "LFcoldPressure",
+    "Description": "LF tire cold pressure  as set in the garage",
+    "Unit": "kPa",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LFtempCL": {
+    "Type": "Single",
+    "Offset": 7437,
+    "Count": 1,
+    "Name": "LFtempCL",
+    "Description": "LF tire left carcass temperature",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LFtempCM": {
+    "Type": "Single",
+    "Offset": 7441,
+    "Count": 1,
+    "Name": "LFtempCM",
+    "Description": "LF tire middle carcass temperature",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LFtempCR": {
+    "Type": "Single",
+    "Offset": 7445,
+    "Count": 1,
+    "Name": "LFtempCR",
+    "Description": "LF tire right carcass temperature",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LFwearL": {
+    "Type": "Single",
+    "Offset": 7449,
+    "Count": 1,
+    "Name": "LFwearL",
+    "Description": "LF tire left percent tread remaining",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LFwearM": {
+    "Type": "Single",
+    "Offset": 7453,
+    "Count": 1,
+    "Name": "LFwearM",
+    "Description": "LF tire middle percent tread remaining",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LFwearR": {
+    "Type": "Single",
+    "Offset": 7457,
+    "Count": 1,
+    "Name": "LFwearR",
+    "Description": "LF tire right percent tread remaining",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "FuelUsePerHour": {
+    "Type": "Single",
+    "Offset": 7461,
+    "Count": 1,
+    "Name": "FuelUsePerHour",
+    "Description": "Engine fuel used instantaneous",
+    "Unit": "kg/h",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "Voltage": {
+    "Type": "Single",
+    "Offset": 7465,
+    "Count": 1,
+    "Name": "Voltage",
+    "Description": "Engine voltage",
+    "Unit": "V",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "WaterTemp": {
+    "Type": "Single",
+    "Offset": 7469,
+    "Count": 1,
+    "Name": "WaterTemp",
+    "Description": "Engine coolant temp",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "WaterLevel": {
+    "Type": "Single",
+    "Offset": 7473,
+    "Count": 1,
+    "Name": "WaterLevel",
+    "Description": "Engine coolant level",
+    "Unit": "l",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "FuelPress": {
+    "Type": "Single",
+    "Offset": 7477,
+    "Count": 1,
+    "Name": "FuelPress",
+    "Description": "Engine fuel pressure",
+    "Unit": "bar",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "OilTemp": {
+    "Type": "Single",
+    "Offset": 7481,
+    "Count": 1,
+    "Name": "OilTemp",
+    "Description": "Engine oil temperature",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "OilPress": {
+    "Type": "Single",
+    "Offset": 7485,
+    "Count": 1,
+    "Name": "OilPress",
+    "Description": "Engine oil pressure",
+    "Unit": "bar",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "OilLevel": {
+    "Type": "Single",
+    "Offset": 7489,
+    "Count": 1,
+    "Name": "OilLevel",
+    "Description": "Engine oil level",
+    "Unit": "l",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ManifoldPress": {
+    "Type": "Single",
+    "Offset": 7493,
+    "Count": 1,
+    "Name": "ManifoldPress",
+    "Description": "Engine manifold pressure",
+    "Unit": "bar",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PowerMGU_K": {
+    "Type": "Single",
+    "Offset": 7497,
+    "Count": 1,
+    "Name": "PowerMGU_K",
+    "Description": "Engine MGU-K mechanical power",
+    "Unit": "W",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "TorqueMGU_K": {
+    "Type": "Single",
+    "Offset": 7501,
+    "Count": 1,
+    "Name": "TorqueMGU_K",
+    "Description": "Engine MGU-K mechanical torque",
+    "Unit": "Nm",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "PowerMGU_H": {
+    "Type": "Single",
+    "Offset": 7505,
+    "Count": 1,
+    "Name": "PowerMGU_H",
+    "Description": "Engine MGU-H mechanical power",
+    "Unit": "W",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "EnergyERSBattery": {
+    "Type": "Single",
+    "Offset": 7509,
+    "Count": 1,
+    "Name": "EnergyERSBattery",
+    "Description": "Engine ERS battery charge",
+    "Unit": "J",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "EnergyERSBatteryPct": {
+    "Type": "Single",
+    "Offset": 7513,
+    "Count": 1,
+    "Name": "EnergyERSBatteryPct",
+    "Description": "Engine ERS battery charge as a percent",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "EnergyBatteryToMGU_KLap": {
+    "Type": "Single",
+    "Offset": 7517,
+    "Count": 1,
+    "Name": "EnergyBatteryToMGU_KLap",
+    "Description": "Electrical energy from battery to MGU-K per lap",
+    "Unit": "J",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "EnergyMGU_KLapDeployPct": {
+    "Type": "Single",
+    "Offset": 7521,
+    "Count": 1,
+    "Name": "EnergyMGU_KLapDeployPct",
+    "Description": "Electrical energy available to MGU-K per lap as a percent",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "FuelLevel": {
+    "Type": "Single",
+    "Offset": 7525,
+    "Count": 1,
+    "Name": "FuelLevel",
+    "Description": "Liters of fuel remaining",
+    "Unit": "l",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "Engine0_RPM": {
+    "Type": "Single",
+    "Offset": 7529,
+    "Count": 1,
+    "Name": "Engine0_RPM",
+    "Description": "Engine0Engine rpm",
+    "Unit": "revs/min",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RRbrakeLinePress": {
+    "Type": "Single",
+    "Offset": 7533,
+    "Count": 1,
+    "Name": "RRbrakeLinePress",
+    "Description": "RR brake line pressure",
+    "Unit": "bar",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RRcoldPressure": {
+    "Type": "Single",
+    "Offset": 7537,
+    "Count": 1,
+    "Name": "RRcoldPressure",
+    "Description": "RR tire cold pressure  as set in the garage",
+    "Unit": "kPa",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RRtempCL": {
+    "Type": "Single",
+    "Offset": 7541,
+    "Count": 1,
+    "Name": "RRtempCL",
+    "Description": "RR tire left carcass temperature",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RRtempCM": {
+    "Type": "Single",
+    "Offset": 7545,
+    "Count": 1,
+    "Name": "RRtempCM",
+    "Description": "RR tire middle carcass temperature",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RRtempCR": {
+    "Type": "Single",
+    "Offset": 7549,
+    "Count": 1,
+    "Name": "RRtempCR",
+    "Description": "RR tire right carcass temperature",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RRwearL": {
+    "Type": "Single",
+    "Offset": 7553,
+    "Count": 1,
+    "Name": "RRwearL",
+    "Description": "RR tire left percent tread remaining",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RRwearM": {
+    "Type": "Single",
+    "Offset": 7557,
+    "Count": 1,
+    "Name": "RRwearM",
+    "Description": "RR tire middle percent tread remaining",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RRwearR": {
+    "Type": "Single",
+    "Offset": 7561,
+    "Count": 1,
+    "Name": "RRwearR",
+    "Description": "RR tire right percent tread remaining",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LRbrakeLinePress": {
+    "Type": "Single",
+    "Offset": 7565,
+    "Count": 1,
+    "Name": "LRbrakeLinePress",
+    "Description": "LR brake line pressure",
+    "Unit": "bar",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LRcoldPressure": {
+    "Type": "Single",
+    "Offset": 7569,
+    "Count": 1,
+    "Name": "LRcoldPressure",
+    "Description": "LR tire cold pressure  as set in the garage",
+    "Unit": "kPa",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LRtempCL": {
+    "Type": "Single",
+    "Offset": 7573,
+    "Count": 1,
+    "Name": "LRtempCL",
+    "Description": "LR tire left carcass temperature",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LRtempCM": {
+    "Type": "Single",
+    "Offset": 7577,
+    "Count": 1,
+    "Name": "LRtempCM",
+    "Description": "LR tire middle carcass temperature",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LRtempCR": {
+    "Type": "Single",
+    "Offset": 7581,
+    "Count": 1,
+    "Name": "LRtempCR",
+    "Description": "LR tire right carcass temperature",
+    "Unit": "C",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LRwearL": {
+    "Type": "Single",
+    "Offset": 7585,
+    "Count": 1,
+    "Name": "LRwearL",
+    "Description": "LR tire left percent tread remaining",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LRwearM": {
+    "Type": "Single",
+    "Offset": 7589,
+    "Count": 1,
+    "Name": "LRwearM",
+    "Description": "LR tire middle percent tread remaining",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LRwearR": {
+    "Type": "Single",
+    "Offset": 7593,
+    "Count": 1,
+    "Name": "LRwearR",
+    "Description": "LR tire right percent tread remaining",
+    "Unit": "%",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "HFshockDefl": {
+    "Type": "Single",
+    "Offset": 7597,
+    "Count": 1,
+    "Name": "HFshockDefl",
+    "Description": "HF shock deflection",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "HFshockDefl_ST": {
+    "Type": "Single",
+    "Offset": 7601,
+    "Count": 6,
+    "Name": "HFshockDefl_ST",
+    "Description": "HF shock deflection at 360 Hz",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "HFshockVel": {
+    "Type": "Single",
+    "Offset": 7625,
+    "Count": 1,
+    "Name": "HFshockVel",
+    "Description": "HF shock velocity",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "HFshockVel_ST": {
+    "Type": "Single",
+    "Offset": 7629,
+    "Count": 6,
+    "Name": "HFshockVel_ST",
+    "Description": "HF shock velocity at 360 Hz",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "ROLLFshockDefl": {
+    "Type": "Single",
+    "Offset": 7653,
+    "Count": 1,
+    "Name": "ROLLFshockDefl",
+    "Description": "ROLLF shock deflection",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ROLLFshockDefl_ST": {
+    "Type": "Single",
+    "Offset": 7657,
+    "Count": 6,
+    "Name": "ROLLFshockDefl_ST",
+    "Description": "ROLLF shock deflection at 360 Hz",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "ROLLFshockVel": {
+    "Type": "Single",
+    "Offset": 7681,
+    "Count": 1,
+    "Name": "ROLLFshockVel",
+    "Description": "ROLLF shock velocity",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "ROLLFshockVel_ST": {
+    "Type": "Single",
+    "Offset": 7685,
+    "Count": 6,
+    "Name": "ROLLFshockVel_ST",
+    "Description": "ROLLF shock velocity at 360 Hz",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "TRshockDefl": {
+    "Type": "Single",
+    "Offset": 7709,
+    "Count": 1,
+    "Name": "TRshockDefl",
+    "Description": "TR shock deflection",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "TRshockDefl_ST": {
+    "Type": "Single",
+    "Offset": 7713,
+    "Count": 6,
+    "Name": "TRshockDefl_ST",
+    "Description": "TR shock deflection at 360 Hz",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "TRshockVel": {
+    "Type": "Single",
+    "Offset": 7737,
+    "Count": 1,
+    "Name": "TRshockVel",
+    "Description": "TR shock velocity",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "TRshockVel_ST": {
+    "Type": "Single",
+    "Offset": 7741,
+    "Count": 6,
+    "Name": "TRshockVel_ST",
+    "Description": "TR shock velocity at 360 Hz",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "LRshockDefl": {
+    "Type": "Single",
+    "Offset": 7765,
+    "Count": 1,
+    "Name": "LRshockDefl",
+    "Description": "LR shock deflection",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LRshockDefl_ST": {
+    "Type": "Single",
+    "Offset": 7769,
+    "Count": 6,
+    "Name": "LRshockDefl_ST",
+    "Description": "LR shock deflection at 360 Hz",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "LRshockVel": {
+    "Type": "Single",
+    "Offset": 7793,
+    "Count": 1,
+    "Name": "LRshockVel",
+    "Description": "LR shock velocity",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LRshockVel_ST": {
+    "Type": "Single",
+    "Offset": 7797,
+    "Count": 6,
+    "Name": "LRshockVel_ST",
+    "Description": "LR shock velocity at 360 Hz",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "RRshockDefl": {
+    "Type": "Single",
+    "Offset": 7821,
+    "Count": 1,
+    "Name": "RRshockDefl",
+    "Description": "RR shock deflection",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RRshockDefl_ST": {
+    "Type": "Single",
+    "Offset": 7825,
+    "Count": 6,
+    "Name": "RRshockDefl_ST",
+    "Description": "RR shock deflection at 360 Hz",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "RRshockVel": {
+    "Type": "Single",
+    "Offset": 7849,
+    "Count": 1,
+    "Name": "RRshockVel",
+    "Description": "RR shock velocity",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RRshockVel_ST": {
+    "Type": "Single",
+    "Offset": 7853,
+    "Count": 6,
+    "Name": "RRshockVel_ST",
+    "Description": "RR shock velocity at 360 Hz",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "LFshockDefl": {
+    "Type": "Single",
+    "Offset": 7877,
+    "Count": 1,
+    "Name": "LFshockDefl",
+    "Description": "LF shock deflection",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LFshockDefl_ST": {
+    "Type": "Single",
+    "Offset": 7881,
+    "Count": 6,
+    "Name": "LFshockDefl_ST",
+    "Description": "LF shock deflection at 360 Hz",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "LFshockVel": {
+    "Type": "Single",
+    "Offset": 7905,
+    "Count": 1,
+    "Name": "LFshockVel",
+    "Description": "LF shock velocity",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "LFshockVel_ST": {
+    "Type": "Single",
+    "Offset": 7909,
+    "Count": 6,
+    "Name": "LFshockVel_ST",
+    "Description": "LF shock velocity at 360 Hz",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "RFshockDefl": {
+    "Type": "Single",
+    "Offset": 7933,
+    "Count": 1,
+    "Name": "RFshockDefl",
+    "Description": "RF shock deflection",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RFshockDefl_ST": {
+    "Type": "Single",
+    "Offset": 7937,
+    "Count": 6,
+    "Name": "RFshockDefl_ST",
+    "Description": "RF shock deflection at 360 Hz",
+    "Unit": "m",
+    "Bytes": 4,
+    "Length": 24
+  },
+  "RFshockVel": {
+    "Type": "Single",
+    "Offset": 7961,
+    "Count": 1,
+    "Name": "RFshockVel",
+    "Description": "RF shock velocity",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 4
+  },
+  "RFshockVel_ST": {
+    "Type": "Single",
+    "Offset": 7965,
+    "Count": 6,
+    "Name": "RFshockVel_ST",
+    "Description": "RF shock velocity at 360 Hz",
+    "Unit": "m/s",
+    "Bytes": 4,
+    "Length": 24
+  }
+}
