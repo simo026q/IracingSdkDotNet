@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.IO.MemoryMappedFiles;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -19,7 +18,6 @@ namespace IracingSdkDotNet.Core;
 public sealed class IracingSdkCore
     : IDisposable
 {
-    private readonly Encoding _encoding;
     private readonly ILogger<IracingSdkCore> _logger;
 
     private bool _disposed;
@@ -73,10 +71,6 @@ public sealed class IracingSdkCore
     /// <param name="logger">A logger instace to log messages.</param>
     public IracingSdkCore(IracingSdkOptions options, ILogger<IracingSdkCore> logger)
     {
-        // Register CP1252 encoding
-        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-        _encoding = Encoding.GetEncoding(1252);
-
         Options = options;
         _logger = logger;
     }
@@ -115,7 +109,7 @@ public sealed class IracingSdkCore
     public IracingSdkCore(MemoryMappedViewAccessor accessor)
         : this()
     {
-        DataReader = new IracingDataReader(accessor, _encoding);
+        DataReader = new IracingDataReader(accessor);
     }
 
     /// <summary>
@@ -211,7 +205,7 @@ public sealed class IracingSdkCore
                     {
                         using var memoryMappedFile = MemoryMappedFile.OpenExisting(Constants.MemMapFileName, MemoryMappedFileRights.Read);
                         MemoryMappedViewAccessor viewAccessor = memoryMappedFile.CreateViewAccessor(0L, 0L, MemoryMappedFileAccess.Read);
-                        DataReader = new IracingDataReader(viewAccessor, _encoding);
+                        DataReader = new IracingDataReader(viewAccessor);
 
                         _logger.LogMemoryMappedFileOpened();
 

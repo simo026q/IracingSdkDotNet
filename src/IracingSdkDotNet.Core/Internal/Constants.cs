@@ -1,4 +1,6 @@
-﻿namespace IracingSdkDotNet.Core.Internal;
+﻿using System.Text;
+
+namespace IracingSdkDotNet.Core.Internal;
 
 internal static class Constants
 {
@@ -15,4 +17,13 @@ internal static class Constants
     public const int VarUnitOffset = 112;
 
     public const char EndChar = '\0';
+
+    public static readonly Encoding DataEncoding;
+
+    static Constants()
+    {
+        // Register CP1252 encoding
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        DataEncoding = Encoding.GetEncoding(1252);
+    }
 }

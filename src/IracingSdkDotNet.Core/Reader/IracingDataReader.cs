@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO.MemoryMappedFiles;
-using System.Text;
 using IracingSdkDotNet.Core.Internal;
 
 #if NET8_0_OR_GREATER
@@ -16,15 +15,12 @@ namespace IracingSdkDotNet.Core.Reader;
 /// </summary>
 public sealed class IracingDataReader : IDisposable
 {
-    private readonly Encoding _encoding;
-
     private bool _disposed;
     private IracingDataHeader? _header;
     private Dictionary<string, VariableHeader>? _variableHeaders;
 
-    internal IracingDataReader(MemoryMappedViewAccessor viewAccessor, Encoding encoding)
+    internal IracingDataReader(MemoryMappedViewAccessor viewAccessor)
     {
-        _encoding = encoding;
         ViewAccessor = viewAccessor;
     }
 
@@ -66,7 +62,7 @@ public sealed class IracingDataReader : IDisposable
 
         return Header is null
             ? null
-            : ViewAccessor.ReadString(Header.SessionInfoOffset, Header.SessionInfoLength);
+            : ViewAccessor.ReadString(Header.SessionInfoOffset, Header.SessionInfoLength, Constants.DataEncoding);
     }
 
     private Dictionary<string, VariableHeader> ReadVariableHeaders()
@@ -81,9 +77,9 @@ public sealed class IracingDataReader : IDisposable
             int offset = ViewAccessor.ReadInt32(positionOffset + Constants.VarOffsetOffset);
             int count = ViewAccessor.ReadInt32(positionOffset + Constants.VarCountOffset);
 
-            string name = ViewAccessor.ReadString(positionOffset + Constants.VarNameOffset, Constants.MaxString, _encoding);
-            string desc = ViewAccessor.ReadString(positionOffset + Constants.VarDescOffset, Constants.MaxDesc, _encoding);
-            string unit = ViewAccessor.ReadString(positionOffset + Constants.VarUnitOffset, Constants.MaxString, _encoding);
+            string name = ViewAccessor.ReadString(positionOffset + Constants.VarNameOffset, Constants.MaxString, Constants.DataEncoding);
+            string desc = ViewAccessor.ReadString(positionOffset + Constants.VarDescOffset, Constants.MaxDesc, Constants.DataEncoding);
+            string unit = ViewAccessor.ReadString(positionOffset + Constants.VarUnitOffset, Constants.MaxString, Constants.DataEncoding);
 
             varHeaders[name] = new VariableHeader(type, offset, count, name, desc, unit);
         }
@@ -133,7 +129,7 @@ public sealed class IracingDataReader : IDisposable
 
         string ReadString(VariableHeader header, int position)
         {
-            return ViewAccessor.ReadString(position, header.Count, _encoding);
+            return ViewAccessor.ReadString(position, header.Count, Constants.DataEncoding);
         }
     }
 
@@ -376,7 +372,7 @@ public sealed class IracingDataReader : IDisposable
         switch (varHeader.Type)
         {
             case VariableType.Char:
-                value = ViewAccessor.ReadString(position, varHeader.Count, _encoding);
+                value = ViewAccessor.ReadString(position, varHeader.Count, Constants.DataEncoding);
                 return true;
 
             case VariableType.Boolean:
