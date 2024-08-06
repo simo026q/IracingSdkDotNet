@@ -242,6 +242,7 @@ public sealed class IracingSdkCore
                     }
                     else if (wasValid)
                     {
+                        wasValid = false;
                         Disconnected?.Invoke(this, EventArgs.Empty);
                         _logger.LogDisconnected();
                     }
