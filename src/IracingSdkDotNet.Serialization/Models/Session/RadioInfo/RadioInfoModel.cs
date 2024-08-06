@@ -4,6 +4,6 @@ namespace IracingSdkDotNet.Serialization.Models.Session.RadioInfo;
 
 public class RadioInfoModel
 {
-    public int SelectedRadioNum { get; set; }
+    public int SelectedRadioNum { get; set; } // %d
     public List<RadioModel> Radios { get; set; }
 }

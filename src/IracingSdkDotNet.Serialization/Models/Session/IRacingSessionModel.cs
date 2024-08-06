@@ -8,7 +8,7 @@ using IracingSdkDotNet.Serialization.Models.Session.WeekendInfo;
 
 namespace IracingSdkDotNet.Serialization.Models.Session;
 
-public class IRacingSessionModel
+public class IracingSessionModel
 {
     public WeekendInfoModel WeekendInfo { get; set; }
     public SessionInfoModel SessionInfo { get; set; }
