@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1DBEAB86-B4E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A0290058-5F3C-4D09-BBBB-4BDC3B466AA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IracingSdkDotNet.Serialization", "src\IracingSdkDotNet.Serialization\IracingSdkDotNet.Serialization.csproj", "{2FDBFB52-CF36-447E-8E4D-F62858E6E487}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IracingSdkDotNet.Serialization", "src\IracingSdkDotNet.Serialization\IracingSdkDotNet.Serialization.csproj", "{2FDBFB52-CF36-447E-8E4D-F62858E6E487}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
