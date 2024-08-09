@@ -15,13 +15,15 @@ namespace IracingSdkDotNet.Core.Reader;
 /// </summary>
 public sealed class IracingDataReader : IDisposable
 {
+    private readonly MemoryMappedViewAccessor _viewAccessor;
+
     private bool _disposed;
     private IracingDataHeader? _header;
     private Dictionary<string, VariableHeader>? _variableHeaders;
 
     internal IracingDataReader(MemoryMappedViewAccessor viewAccessor)
     {
-        ViewAccessor = viewAccessor;
+        _viewAccessor = viewAccessor;
     }
 
     /// <summary>
@@ -32,14 +34,12 @@ public sealed class IracingDataReader : IDisposable
         Dispose(false);
     }
 
-    internal MemoryMappedViewAccessor ViewAccessor { get; }
-
     /// <summary>
     /// The <see cref="IracingDataHeader"/> of the current data.
     /// </summary>
     public IracingDataHeader Header => _disposed
         ? throw new ObjectDisposedException(nameof(IracingDataReader))
-        : _header ??= new IracingDataHeader(ViewAccessor);
+        : _header ??= new IracingDataHeader(_viewAccessor);
 
     /// <summary>
     /// The variable headers of the current data.
@@ -62,7 +62,7 @@ public sealed class IracingDataReader : IDisposable
 
         return Header is null
             ? null
-            : ViewAccessor.ReadString(Header.SessionInfoOffset, Header.SessionInfoLength);
+            : _viewAccessor.ReadString(Header.SessionInfoOffset, Header.SessionInfoLength);
     }
 
     private Dictionary<string, VariableHeader> ReadVariableHeaders()
@@ -73,13 +73,13 @@ public sealed class IracingDataReader : IDisposable
         {
             int positionOffset = Header.VariableHeaderOffset + i * VariableHeader.Size;
 
-            var type = (VariableType)ViewAccessor.ReadInt32(positionOffset);
-            int offset = ViewAccessor.ReadInt32(positionOffset + Constants.VarOffsetOffset);
-            int count = ViewAccessor.ReadInt32(positionOffset + Constants.VarCountOffset);
+            var type = (VariableType)_viewAccessor.ReadInt32(positionOffset);
+            int offset = _viewAccessor.ReadInt32(positionOffset + Constants.VarOffsetOffset);
+            int count = _viewAccessor.ReadInt32(positionOffset + Constants.VarCountOffset);
 
-            string name = ViewAccessor.ReadString(positionOffset + Constants.VarNameOffset, Constants.MaxString);
-            string desc = ViewAccessor.ReadString(positionOffset + Constants.VarDescOffset, Constants.MaxDesc);
-            string unit = ViewAccessor.ReadString(positionOffset + Constants.VarUnitOffset, Constants.MaxString);
+            string name = _viewAccessor.ReadString(positionOffset + Constants.VarNameOffset, Constants.MaxString);
+            string desc = _viewAccessor.ReadString(positionOffset + Constants.VarDescOffset, Constants.MaxDesc);
+            string unit = _viewAccessor.ReadString(positionOffset + Constants.VarUnitOffset, Constants.MaxString);
 
             varHeaders[name] = new VariableHeader(type, offset, count, name, desc, unit);
         }
@@ -129,7 +129,7 @@ public sealed class IracingDataReader : IDisposable
 
         string ReadString(VariableHeader header, int position)
         {
-            return ViewAccessor.ReadString(position, header.Count);
+            return _viewAccessor.ReadString(position, header.Count);
         }
     }
 
@@ -149,7 +149,7 @@ public sealed class IracingDataReader : IDisposable
 
         bool ReadBoolean(VariableHeader _, int position)
         {
-            return ViewAccessor.ReadBoolean(position);
+            return _viewAccessor.ReadBoolean(position);
         }
     }
 
@@ -169,7 +169,7 @@ public sealed class IracingDataReader : IDisposable
 
         bool[] ReadBooleanArray(VariableHeader header, int position)
         {
-            return ViewAccessor.ReadArray<bool>(position, header.Count);
+            return _viewAccessor.ReadArray<bool>(position, header.Count);
         }
     }
 
@@ -189,7 +189,7 @@ public sealed class IracingDataReader : IDisposable
 
         int ReadInt32(VariableHeader _, int position)
         {
-            return ViewAccessor.ReadInt32(position);
+            return _viewAccessor.ReadInt32(position);
         }
     }
 
@@ -209,10 +209,10 @@ public sealed class IracingDataReader : IDisposable
 
         int[] ReadInt32Array(VariableHeader header, int position)
         {
-            return ViewAccessor.ReadArray<int>(position, header.Count);
+            return _viewAccessor.ReadArray<int>(position, header.Count);
         }
     }
-    
+
     /// <summary>
     /// Tries to read a bit field value from the shared memory.
     /// </summary>
@@ -230,11 +230,11 @@ public sealed class IracingDataReader : IDisposable
 
         T ReadBitField(VariableHeader _, int position)
         {
-            ViewAccessor.Read(position, out T v);
+            _viewAccessor.Read(position, out T v);
             return v;
         }
     }
-    
+
     /// <summary>
     /// Tries to read a bit field array from the shared memory.
     /// </summary>
@@ -252,7 +252,7 @@ public sealed class IracingDataReader : IDisposable
 
         T[] ReadBitFieldArray(VariableHeader header, int position)
         {
-            return ViewAccessor.ReadArray<T>(position, header.Count);
+            return _viewAccessor.ReadArray<T>(position, header.Count);
         }
     }
 
@@ -272,7 +272,7 @@ public sealed class IracingDataReader : IDisposable
 
         float ReadSingle(VariableHeader _, int position)
         {
-            return ViewAccessor.ReadSingle(position);
+            return _viewAccessor.ReadSingle(position);
         }
     }
 
@@ -292,7 +292,7 @@ public sealed class IracingDataReader : IDisposable
 
         float[] ReadSingleArray(VariableHeader header, int position)
         {
-            return ViewAccessor.ReadArray<float>(position, header.Count);
+            return _viewAccessor.ReadArray<float>(position, header.Count);
         }
     }
 
@@ -312,7 +312,7 @@ public sealed class IracingDataReader : IDisposable
 
         double ReadDouble(VariableHeader _, int position)
         {
-            return ViewAccessor.ReadDouble(position);
+            return _viewAccessor.ReadDouble(position);
         }
     }
 
@@ -332,7 +332,7 @@ public sealed class IracingDataReader : IDisposable
 
         double[] ReadDoubleArray(VariableHeader header, int position)
         {
-            return ViewAccessor.ReadArray<double>(position, header.Count);
+            return _viewAccessor.ReadArray<double>(position, header.Count);
         }
     }
 
@@ -359,35 +359,35 @@ public sealed class IracingDataReader : IDisposable
         switch (varHeader.Type)
         {
             case VariableType.Char:
-                value = ViewAccessor.ReadString(position, varHeader.Count);
+                value = _viewAccessor.ReadString(position, varHeader.Count);
                 return true;
 
             case VariableType.Boolean:
                 value = varHeader.Count > 1
-                    ? ViewAccessor.ReadArray<bool>(position, varHeader.Count)
-                    : ViewAccessor.ReadBoolean(position);
+                    ? _viewAccessor.ReadArray<bool>(position, varHeader.Count)
+                    : _viewAccessor.ReadBoolean(position);
 
                 return true;
 
             case VariableType.Int32:
             case VariableType.BitField:
                 value = varHeader.Count > 1
-                    ? ViewAccessor.ReadArray<int>(position, varHeader.Count)
-                    : ViewAccessor.ReadInt32(position);
+                    ? _viewAccessor.ReadArray<int>(position, varHeader.Count)
+                    : _viewAccessor.ReadInt32(position);
 
                 return true;
 
             case VariableType.Single:
                 value = varHeader.Count > 1
-                    ? ViewAccessor.ReadArray<float>(position, varHeader.Count)
-                    : ViewAccessor.ReadSingle(position);
+                    ? _viewAccessor.ReadArray<float>(position, varHeader.Count)
+                    : _viewAccessor.ReadSingle(position);
 
                 return true;
 
             case VariableType.Double:
                 value = varHeader.Count > 1
-                    ? ViewAccessor.ReadArray<double>(position, varHeader.Count)
-                    : ViewAccessor.ReadDouble(position);
+                    ? _viewAccessor.ReadArray<double>(position, varHeader.Count)
+                    : _viewAccessor.ReadDouble(position);
 
                 return true;
 
@@ -420,7 +420,7 @@ public sealed class IracingDataReader : IDisposable
             _header = null;
         }
 
-        ViewAccessor.Dispose();
+        _viewAccessor.Dispose();
 
         _disposed = true;
     }
