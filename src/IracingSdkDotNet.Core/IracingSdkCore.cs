@@ -47,7 +47,7 @@ public sealed class IracingSdkCore
     /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
     public bool IsConnected => _disposed 
         ? throw new ObjectDisposedException(nameof(IracingSdkCore)) 
-        : DataReader != null && (DataReader.Header.Status & 1) > 0;
+        : DataReader != null && DataReader.Header.IsConnected;
 
     /// <summary>
     /// Occurs when the data from iRacing's shared memory has been updated. Should be updated at the same rate as the <see cref="IracingDataHeader.TickRate"/> in the data header (usually 60 Hz).
@@ -137,7 +137,7 @@ public sealed class IracingSdkCore
         _loopCancellationSource = new();
 
         Task.Factory.StartNew(
-            () => ConnectionLoop(_loopCancellationSource.Token),
+            () => Loop(_loopCancellationSource.Token),
             _loopCancellationSource.Token,
             TaskCreationOptions.LongRunning,
             TaskScheduler.Default);
@@ -191,108 +191,83 @@ public sealed class IracingSdkCore
         _disposed = true;
     }
 
-    private async Task ConnectionLoop(CancellationToken cancellationToken)
+    private async Task Loop(CancellationToken cancellationToken)
     {
-        CancellationTokenSource? dataCts = null;
+        bool wasValid = false;
+        AutoResetEvent? autoResetEvent = null;
 
         while (!cancellationToken.IsCancellationRequested)
         {
-            if (!IsConnected)
+            if (DataReader is null)
             {
-                if (DataReader == null)
-                {
-                    try
-                    {
-                        using var memoryMappedFile = MemoryMappedFile.OpenExisting(Constants.MemMapFileName, MemoryMappedFileRights.Read);
-                        MemoryMappedViewAccessor viewAccessor = memoryMappedFile.CreateViewAccessor(0L, 0L, MemoryMappedFileAccess.Read);
-                        DataReader = new IracingDataReader(viewAccessor);
-
-                        _logger.LogMemoryMappedFileOpened();
-
-                        nint eventHandle = NativeMethods.OpenEvent(Constants.DesiredAccess, false, Constants.DataValidEventName);
-                        var safeWaitHandle = new SafeWaitHandle(eventHandle, true);
-
-                        var autoResetEvent = new AutoResetEvent(false) 
-                        {
-                            SafeWaitHandle = safeWaitHandle
-                        };
-
-                        dataCts = new();
-
-                        _ = Task.Factory.StartNew(
-                            () => DataLoop(autoResetEvent, dataCts.Token),
-                            dataCts.Token,
-                            TaskCreationOptions.LongRunning,
-                            TaskScheduler.Default);
-
-                        continue;
-                    }
-                    catch (FileNotFoundException ex)
-                    {
-                        _logger.LogMemoryMappedFileOpenFailed(ex);
-                    }
-                }
-
                 try
                 {
-                    _logger.LogWaitingForConnectionRetry(Options.CheckConnectionDelay);
-                    await Task.Delay(Options.CheckConnectionDelay, cancellationToken);
+                    using var memoryMappedFile = MemoryMappedFile.OpenExisting(Constants.MemMapFileName, MemoryMappedFileRights.Read);
+                    MemoryMappedViewAccessor viewAccessor = memoryMappedFile.CreateViewAccessor(0L, 0L, MemoryMappedFileAccess.Read);
+                    DataReader = new IracingDataReader(viewAccessor);
+
+                    _logger.LogMemoryMappedFileOpened();
+
+                    nint eventHandle = NativeMethods.OpenEvent(Constants.DesiredAccess, false, Constants.DataValidEventName);
+                    var safeWaitHandle = new SafeWaitHandle(eventHandle, true);
+                    autoResetEvent = new AutoResetEvent(false)
+                    {
+                        SafeWaitHandle = safeWaitHandle
+                    };
+
+                    continue;
                 }
-                catch (OperationCanceledException)
+                catch (FileNotFoundException ex)
                 {
-                    _logger.LogConnectionRetryWaitCancelled();
-                    break;
+                    _logger.LogMemoryMappedFileOpenFailed(ex);
                 }
             }
-        }
+            else if (DataReader.Header.IsConnected)
+            {
+                try
+                {
+                    bool valid = await autoResetEvent!.WaitOneAsync(cancellationToken);
 
-#if NET8_0_OR_GREATER
-        if (dataCts != null)
-        {
-            await dataCts.CancelAsync();
-        }
-#else
-        dataCts?.Cancel();
-#endif
-        dataCts = null;
+                    if (valid)
+                    {
+                        if (!wasValid)
+                        {
+                            wasValid = true;
+                            Connected?.Invoke(this, EventArgs.Empty);
+                            _logger.LogConnected();
+                        }
 
-        _logger.LogConnectionLoopExited();
-    }
+                        DataUpdated?.Invoke(this, DataReader);
+                        _logger.LogDataUpdated();
+                    }
+                    else if (wasValid)
+                    {
+                        wasValid = false;
+                        Disconnected?.Invoke(this, EventArgs.Empty);
+                        _logger.LogDisconnected();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogDataLoopWaitError(ex);
+                }
 
-    private async Task DataLoop(AutoResetEvent autoResetEvent, CancellationToken cancellationToken)
-    {
-        bool wasValid = false;
+                continue;
+            }
 
-        while (!cancellationToken.IsCancellationRequested && DataReader != null)
-        {
             try
             {
-                bool valid = await autoResetEvent.WaitOneAsync(cancellationToken);
-
-                if (valid)
-                {
-                    if (!wasValid)
-                    {
-                        wasValid = true;
-                        Connected?.Invoke(this, EventArgs.Empty);
-                        _logger.LogConnected();
-                    }
-
-                    DataUpdated?.Invoke(this, DataReader);
-                    _logger.LogDataUpdated();
-                }
-                else if (wasValid)
-                {
-                    Disconnected?.Invoke(this, EventArgs.Empty);
-                    _logger.LogDisconnected();
-                }
+                _logger.LogWaitingForConnectionRetry(Options.CheckConnectionDelay);
+                await Task.Delay(Options.CheckConnectionDelay, cancellationToken);
             }
-            catch (Exception ex)
+            catch (OperationCanceledException)
             {
-                _logger.LogDataLoopWaitError(ex);
+                _logger.LogConnectionRetryWaitCancelled();
+                break;
             }
         }
 
-        _logger.LogDataLoopExited();
+        autoResetEvent?.Dispose();
+        _logger.LogLoopStopped();
     }
 }

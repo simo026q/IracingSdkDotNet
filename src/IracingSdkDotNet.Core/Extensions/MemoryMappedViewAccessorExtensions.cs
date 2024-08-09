@@ -7,9 +7,11 @@ internal static class MemoryMappedViewAccessorExtensions
 {
     public static string ReadString(this MemoryMappedViewAccessor accessor, int position, int count)
     {
-        byte[] data = new byte[count];
-        accessor.ReadArray(position, data, 0, count);
-        return Constants.DataEncoding.GetString(data).TrimEnd(Constants.EndChar);
+        byte[] bytes = accessor.ReadArray<byte>(position, count);
+
+        return Constants.MemoryMappedFileEncoding
+            .GetString(bytes)
+            .TrimEnd(Constants.StringTerminator);
     }
     
     public static T[] ReadArray<T>(this MemoryMappedViewAccessor accessor, int position, int count) 

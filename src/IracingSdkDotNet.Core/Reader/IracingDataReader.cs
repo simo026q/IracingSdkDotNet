@@ -226,18 +226,12 @@ public sealed class IracingDataReader : IDisposable
 #endif
         where T : struct, Enum
     {
-        if (TryReadHeaderValue(name, VariableType.BitField, ReadInt32, out int intValue) && intValue is T result)
-        {
-            value = result;
-            return true;
-        }
+        return TryReadHeaderValue(name, VariableType.BitField, ReadBitField, out value);
 
-        value = default;
-        return false;
-
-        int ReadInt32(VariableHeader _, int position)
+        T ReadBitField(VariableHeader _, int position)
         {
-            return ViewAccessor.ReadInt32(position);
+            ViewAccessor.Read(position, out T v);
+            return v;
         }
     }
     
@@ -254,18 +248,11 @@ public sealed class IracingDataReader : IDisposable
 #endif
         where T : struct, Enum
     {
-        if (TryReadHeaderValue(name, VariableType.BitField, ReadInt32Array, out int[]? intValue) && intValue is T[] result)
-        {
-            value = result;
-            return true;
-        }
+        return TryReadHeaderValue(name, VariableType.BitField, ReadBitFieldArray, out value);
 
-        value = default;
-        return false;
-
-        int[] ReadInt32Array(VariableHeader header, int position)
+        T[] ReadBitFieldArray(VariableHeader header, int position)
         {
-            return ViewAccessor.ReadArray<int>(position, header.Count);
+            return ViewAccessor.ReadArray<T>(position, header.Count);
         }
     }
 
