@@ -16,14 +16,14 @@ internal static class Constants
     public const int VarDescOffset = 48;
     public const int VarUnitOffset = 112;
 
-    public const char EndChar = '\0';
+    public const char StringTerminator = '\0';
 
-    public static readonly Encoding DataEncoding;
+    public static readonly Encoding MemoryMappedFileEncoding;
 
     static Constants()
     {
         // Register CP1252 encoding
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-        DataEncoding = Encoding.GetEncoding(1252);
+        MemoryMappedFileEncoding = Encoding.GetEncoding(1252);
     }
 }
