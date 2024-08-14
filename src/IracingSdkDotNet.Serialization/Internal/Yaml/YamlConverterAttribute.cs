@@ -9,9 +9,9 @@ internal sealed class YamlConverterAttribute : Attribute
 
     public YamlConverterAttribute(Type converterType)
     {
-        if (!converterType.IsAssignableFrom(typeof(IYamlConverter<>)))
+        if (!typeof(YamlConverter).IsAssignableFrom(converterType))
         {
-            throw new InvalidOperationException($"The type '{converterType}' does not implement '{typeof(IYamlConverter<>)}'.");
+            throw new InvalidOperationException($"The type '{converterType.FullName}' does not implement '{nameof(YamlConverter)}'.");
         }
 
         ConverterType = converterType;
