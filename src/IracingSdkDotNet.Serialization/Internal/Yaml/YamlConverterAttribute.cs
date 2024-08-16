@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Concurrent;
 
 namespace IracingSdkDotNet.Serialization.Internal.Yaml;
 
 internal sealed class YamlConverterAttribute 
-    : YamlConvertFactoryAttribute
+    : YamlConverterFactoryAttribute
 {
+    private static readonly ConcurrentDictionary<Type, YamlConverter> Converters = new();
+
     public Type ConverterType { get; }
 
     public YamlConverterAttribute(Type converterType)
@@ -19,6 +22,14 @@ internal sealed class YamlConverterAttribute
 
     public override YamlConverter? CreateConverter(Type type)
     {
-        return (YamlConverter?)Activator.CreateInstance(ConverterType);
+        if (Converters.TryGetValue(type, out YamlConverter? converter))
+        {
+            return converter;
+        }
+
+        converter = (YamlConverter)Activator.CreateInstance(ConverterType)!;
+        Converters.TryAdd(type, converter);
+
+        return converter;
     }
 }

@@ -52,7 +52,7 @@ public static class YamlSerializer
                 continue;
             }
 
-            object? value = DeserializeValue(parser, new TypeDescriptor(property.PropertyType, property.GetCustomAttribute<YamlConverterAttribute>()?.CreateConverter(property.PropertyType)), serializerOptions);
+            object? value = DeserializeValue(parser, new TypeDescriptor(property.PropertyType, property.GetCustomAttribute<YamlConverterFactoryAttribute>()?.CreateConverter(property.PropertyType)), serializerOptions);
             property.SetValue(result, value);
         }
 
