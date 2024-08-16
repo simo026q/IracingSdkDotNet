@@ -9,18 +9,25 @@ namespace IracingSdkDotNet.Serialization.Internal.Yaml;
 
 public static class YamlSerializer
 {
+    private sealed class TypeDescriptor(Type type, YamlConverter? converter)
+    {
+        public Type Type { get; } = type;
+        public YamlConverter? Converter { get; } = converter;
+    }
+
     public static object? Deserialize(Parser parser, Type type, YamlSerializerOptions serializerOptions) 
     {
         parser.Consume<StreamStart>();
         parser.Consume<DocumentStart>();
 
-        var result = DeserializeObject(parser, type, serializerOptions);
+        var result = DeserializeObject(parser, new TypeDescriptor(type, null), serializerOptions);
 
         return result;
     }
 
-    private static object? DeserializeObject(Parser parser, Type type, YamlSerializerOptions serializerOptions)
+    private static object? DeserializeObject(Parser parser, TypeDescriptor typeDescriptor, YamlSerializerOptions serializerOptions)
     {
+        Type type = typeDescriptor.Type;
         object? result = Activator.CreateInstance(type);
         if (result is null)
         {
@@ -45,16 +52,19 @@ public static class YamlSerializer
                 continue;
             }
 
-            object? value = DeserializeValue(parser, property.PropertyType, serializerOptions);
+            object? value = DeserializeValue(parser, new TypeDescriptor(property.PropertyType, property.GetCustomAttribute<YamlConverterAttribute>()?.CreateConverter(property.PropertyType)), serializerOptions);
             property.SetValue(result, value);
         }
 
         return result;
     }
 
-    private static object? DeserializeValue(Parser parser, Type type, YamlSerializerOptions serializerOptions)
+    private static object? DeserializeValue(Parser parser, TypeDescriptor typeDescriptor, YamlSerializerOptions serializerOptions)
     {
-        var result = serializerOptions.GetConverter(type)?.ReadAsObject(parser.Consume<Scalar>().Value);
+        Type type = typeDescriptor.Type;
+        YamlConverter? converter = typeDescriptor.Converter ?? serializerOptions.GetConverter(type);
+
+        var result = converter?.ReadAsObject(parser.Consume<Scalar>().Value);
         if (result != null)
         {
             return result;
@@ -70,7 +80,7 @@ public static class YamlSerializer
             parser.Consume<SequenceStart>();
             while (!parser.TryConsume<SequenceEnd>(out _))
             {
-                var value = DeserializeValue(parser, itemType, serializerOptions);
+                var value = DeserializeValue(parser, new TypeDescriptor(itemType, null), serializerOptions);
                 if (value != null)
                 {
                     addMethod?.Invoke(list, [value]);
@@ -82,7 +92,7 @@ public static class YamlSerializer
 
         if (type.IsClass)
         {
-            return DeserializeObject(parser, type, serializerOptions);
+            return DeserializeObject(parser, new TypeDescriptor(type, null), serializerOptions);
         }
 
         throw new NotSupportedException($"Unsupported type: {type.FullName}");

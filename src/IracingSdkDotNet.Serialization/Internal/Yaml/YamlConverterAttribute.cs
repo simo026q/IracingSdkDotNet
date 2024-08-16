@@ -2,8 +2,8 @@
 
 namespace IracingSdkDotNet.Serialization.Internal.Yaml;
 
-[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-internal sealed class YamlConverterAttribute : Attribute
+internal sealed class YamlConverterAttribute 
+    : YamlConvertFactoryAttribute
 {
     public Type ConverterType { get; }
 
@@ -15,5 +15,10 @@ internal sealed class YamlConverterAttribute : Attribute
         }
 
         ConverterType = converterType;
+    }
+
+    public override YamlConverter? CreateConverter(Type type)
+    {
+        return (YamlConverter?)Activator.CreateInstance(ConverterType);
     }
 }
