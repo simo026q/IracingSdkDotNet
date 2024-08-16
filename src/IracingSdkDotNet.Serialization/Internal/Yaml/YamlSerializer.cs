@@ -20,14 +20,19 @@ public static class YamlSerializer
         parser.Consume<StreamStart>();
         parser.Consume<DocumentStart>();
 
-        var result = DeserializeObject(parser, new TypeDescriptor(type, null), serializerOptions);
-
-        return result;
+        return DeserializeObject(parser, new TypeDescriptor(type, null), serializerOptions);
     }
 
     private static object? DeserializeObject(Parser parser, TypeDescriptor typeDescriptor, YamlSerializerOptions serializerOptions)
     {
         Type type = typeDescriptor.Type;
+
+        // Directly handle types that do not have a parameterless constructor
+        if (!type.IsClass || type.IsAbstract)
+        {
+            throw new NotSupportedException($"Unsupported type: {type.FullName}");
+        }
+
         object? result = Activator.CreateInstance(type);
         if (result is null)
         {
@@ -36,23 +41,24 @@ public static class YamlSerializer
         
         parser.Consume<MappingStart>();
 
+        // Cache properties with required conditions to avoid calling reflection repeatedly.
         var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            .Where(p => p.CanWrite && p.GetCustomAttribute<YamlIgnoreAttribute>() == null);
+            .Where(p => p.CanWrite && p.GetCustomAttribute<YamlIgnoreAttribute>() == null)
+            .ToDictionary(p => p.GetCustomAttribute<YamlPropertyNameAttribute>()?.Name ?? p.Name, p => p);
 
         while (!parser.TryConsume<MappingEnd>(out _))
         {
             var key = parser.Consume<Scalar>().Value;
 
-            var property = properties.FirstOrDefault(p => p.Name == key || p.GetCustomAttribute<YamlPropertyNameAttribute>()?.Name == key);
-
-            if (property == null)
+            if (!properties.TryGetValue(key, out var property))
             {
                 // Skip unknown properties
                 parser.SkipThisAndNestedEvents();
                 continue;
             }
 
-            object? value = DeserializeValue(parser, new TypeDescriptor(property.PropertyType, property.GetCustomAttribute<YamlConverterFactoryAttribute>()?.CreateConverter(property.PropertyType)), serializerOptions);
+            YamlConverter? converter = property.GetCustomAttribute<YamlConverterFactoryAttribute>()?.CreateConverter(property.PropertyType);
+            object? value = DeserializeValue(parser, new TypeDescriptor(property.PropertyType, converter), serializerOptions);
             property.SetValue(result, value);
         }
 
@@ -64,17 +70,16 @@ public static class YamlSerializer
         Type type = typeDescriptor.Type;
         YamlConverter? converter = typeDescriptor.Converter ?? serializerOptions.GetConverter(type);
 
-        var result = converter?.ReadAsObject(parser.Consume<Scalar>().Value);
-        if (result != null)
+        if (converter != null)
         {
-            return result;
+            string scalarValue = parser.Consume<Scalar>().Value;
+            return converter.ReadAsObject(scalarValue);
         }
 
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
         {
             var list = Activator.CreateInstance(type);
             var itemType = type.GetGenericArguments()[0];
-
             var addMethod = type.GetMethod("Add");
 
             parser.Consume<SequenceStart>();
@@ -90,12 +95,7 @@ public static class YamlSerializer
             return list;
         }
 
-        if (type.IsClass)
-        {
-            return DeserializeObject(parser, new TypeDescriptor(type, null), serializerOptions);
-        }
-
-        throw new NotSupportedException($"Unsupported type: {type.FullName}");
+        return DeserializeObject(parser, new TypeDescriptor(type, null), serializerOptions);
     }
 }
 
