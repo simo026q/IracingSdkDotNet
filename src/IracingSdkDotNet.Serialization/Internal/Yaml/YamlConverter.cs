@@ -4,7 +4,7 @@ namespace IracingSdkDotNet.Serialization.Internal.Yaml;
 
 public abstract class YamlConverter
 {
-    public abstract Type Type { get; }
+    public abstract bool CanConvert(Type type);
     public abstract object? ReadAsObject(string value);
     public abstract string WriteAsObject(object? value);
 }
@@ -14,7 +14,10 @@ public abstract class YamlConverter<T> : YamlConverter
     public abstract T? ReadYaml(string value);
     public abstract string WriteYaml(T? value);
 
-    public sealed override Type Type => typeof(T);
+    public override bool CanConvert(Type type)
+    {
+        return type == typeof(T);
+    }
 
     public sealed override object? ReadAsObject(string value)
     {
@@ -39,6 +42,23 @@ internal sealed class StringYamlConverter : YamlConverter<string>
     public override string WriteYaml(string value)
     {
         return value;
+    }
+}
+
+internal sealed class BooleanYamlConverter : YamlConverter<bool>
+{
+    public static readonly BooleanYamlConverter Instance = new();
+
+    public override bool ReadYaml(string value)
+    {
+        return bool.TryParse(value, out bool result) && result;
+    }
+
+    public override string WriteYaml(bool value)
+    {
+        return value 
+            ? "true" 
+            : "false";
     }
 }
 

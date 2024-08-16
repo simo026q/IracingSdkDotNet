@@ -1,5 +1,6 @@
 ﻿using IracingSdkDotNet.Serialization.Internal.Yaml;
 using IracingSdkDotNet.Serialization.Models.Session;
+using YamlDotNet.Core;
 
 var solutionDirectory = GetSolutionDirectory();
 if (solutionDirectory == null)
@@ -11,7 +12,7 @@ if (solutionDirectory == null)
 var path = Path.Combine(solutionDirectory, "data", "le-mans porsche-963-gtp", "session-info.yaml");
 string yaml = File.ReadAllText(path);
 
-var model = YamlSerializer.Deserialize<IracingSessionModel>(yaml, YamlSerializerOptions.Default);
+var model = YamlSerializer.Deserialize(new Parser(new StringReader(yaml)), typeof(IracingSessionModel), YamlSerializerOptions.Default);
 
 Console.WriteLine("End of file.");
 Console.ReadKey();
