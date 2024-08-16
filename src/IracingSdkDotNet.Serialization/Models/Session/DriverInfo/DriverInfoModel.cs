@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using IracingSdkDotNet.Serialization.Internal.Yaml;
+using System.Collections.Generic;
 
 namespace IracingSdkDotNet.Serialization.Models.Session.DriverInfo;
 
@@ -10,7 +11,9 @@ public class DriverInfoModel
     public float DriverHeadPosX { get; set; } // %.3f
     public float DriverHeadPosY { get; set; } // %.3f
     public float DriverHeadPosZ { get; set; } // %.3f
-    public string DriverCarIsElectric { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool DriverCarIsElectric { get; set; } // %d (boolean)
     public float DriverCarIdleRPM { get; set; } // %.3f
     public float DriverCarRedLine { get; set; } // %.3f
     public int DriverCarEngCylinderCount { get; set; } // %d
@@ -28,9 +31,13 @@ public class DriverInfoModel
     public float DriverPitTrkPct { get; set; } // %.6f
     public float DriverCarEstLapTime { get; set; } // %.4f
     public string DriverSetupName { get; set; } // %s
-    public int DriverSetupIsModified { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool DriverSetupIsModified { get; set; } // %d (boolean)
     public string DriverSetupLoadTypeName { get; set; } // %s
-    public int DriverSetupPassedTech { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool DriverSetupPassedTech { get; set; } // %d (boolean)
     public int DriverIncidentCount { get; set; } // %d
     public List<DriverModel> Drivers { get; set; }
 }

@@ -1,34 +1,66 @@
-﻿namespace IracingSdkDotNet.Serialization.Models.Session.WeekendInfo;
+﻿using IracingSdkDotNet.Serialization.Internal.Yaml;
+
+namespace IracingSdkDotNet.Serialization.Models.Session.WeekendInfo;
 
 public class WeekendInfoModel
 {
     public string TrackName { get; set; } // %s
     public int TrackID { get; set; } // %d
-    public string TrackLength { get; set; } // %0.2f km
-    public string TrackLengthOfficial { get; set; } // %0.2f km
+
+    [SingleUnitYamlConverterFactory(" km")]
+    public float TrackLength { get; set; } // %0.2f km
+
+    [SingleUnitYamlConverterFactory(" km")]
+    public float TrackLengthOfficial { get; set; } // %0.2f km
     public string TrackDisplayName { get; set; } // %s
     public string TrackDisplayShortName { get; set; } // %s
     public string TrackConfigName { get; set; } // %s
     public string TrackCity { get; set; } // %s
     public string TrackCountry { get; set; } // %s
-    public string TrackAltitude { get; set; } // %0.2f m
-    public string TrackLatitude { get; set; } // %0.6f m
-    public string TrackLongitude { get; set; } // %0.6f m
-    public string TrackNorthOffset { get; set; } // %0.4f rad
+
+    [SingleUnitYamlConverterFactory(" m")]
+    public float TrackAltitude { get; set; } // %0.2f m
+
+    [SingleUnitYamlConverterFactory(" m")]
+    public float TrackLatitude { get; set; } // %0.6f m
+
+    [SingleUnitYamlConverterFactory(" m")]
+    public float TrackLongitude { get; set; } // %0.6f m
+
+    [SingleUnitYamlConverterFactory(" rad")]
+    public float TrackNorthOffset { get; set; } // %0.4f rad
     public int TrackNumTurns { get; set; } // %d
-    public string TrackPitSpeedLimit { get; set; } // %0.2f kph
+
+    [SingleUnitYamlConverterFactory(" kph")]
+    public float TrackPitSpeedLimit { get; set; } // %0.2f kph
     public string TrackType { get; set; } // %s
     public string TrackDirection { get; set; } // %s
     public string TrackWeatherType { get; set; } // %s
     public string TrackSkies { get; set; } // %s
-    public string TrackSurfaceTemp { get; set; } // %0.2f C
-    public string TrackAirTemp { get; set; } // %0.2f C
-    public string TrackAirPressure { get; set; } // %0.2f Hg
-    public string TrackWindVel { get; set; } // %0.2f m/s
-    public string TrackWindDir { get; set; } // %0.2f rad
-    public string TrackRelativeHumidity { get; set; } // %d %
-    public string TrackFogLevel { get; set; } // %d %
-    public string TrackPrecipitation { get; set; } // %d %
+
+    [SingleUnitYamlConverterFactory(" C")]
+    public float TrackSurfaceTemp { get; set; } // %0.2f C
+
+    [SingleUnitYamlConverterFactory(" C")]
+    public float TrackAirTemp { get; set; } // %0.2f C
+
+    [SingleUnitYamlConverterFactory(" Hg")]
+    public float TrackAirPressure { get; set; } // %0.2f Hg
+
+    [SingleUnitYamlConverterFactory(" m/s")]
+    public float TrackWindVel { get; set; } // %0.2f m/s
+
+    [SingleUnitYamlConverterFactory(" rad")]
+    public float TrackWindDir { get; set; } // %0.2f rad
+
+    [YamlConverter(typeof(PercentageYamlConverter))]
+    public float TrackRelativeHumidity { get; set; } // %d %
+
+    [YamlConverter(typeof(PercentageYamlConverter))]
+    public float TrackFogLevel { get; set; } // %d %
+
+    [YamlConverter(typeof(PercentageYamlConverter))]
+    public float TrackPrecipitation { get; set; } // %d %
     public int TrackCleanup { get; set; } // %d (?boolean)
     public int TrackDynamicTrack { get; set; } // %d (?boolean)
     public string TrackVersion { get; set; } // %s
@@ -42,14 +74,18 @@ public class WeekendInfoModel
     public string EventType { get; set; } // %s
     public string Category { get; set; } // %s
     public string SimMode { get; set; } // %s
-    public int TeamRacing { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool TeamRacing { get; set; } // %d (boolean)
     public int MinDrivers { get; set; } // %d
     public int MaxDrivers { get; set; } // %d
     public string DCRuleSet { get; set; } // %s
-    public int QualifierMustStartRace { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool QualifierMustStartRace { get; set; } // %d (boolean)
     public int NumCarClasses { get; set; } // %d
     public int NumCarTypes { get; set; } // %d
-    public string HeatRacing { get; set; } // %d (?boolean)
+    public int HeatRacing { get; set; } // %d (?boolean)
     public string BuildType { get; set; } // %s
     public string BuildTarget { get; set; } // %s
     public string BuildVersion { get; set; } // %s

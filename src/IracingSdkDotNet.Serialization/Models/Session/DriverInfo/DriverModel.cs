@@ -1,4 +1,6 @@
-﻿namespace IracingSdkDotNet.Serialization.Models.Session.DriverInfo;
+﻿using IracingSdkDotNet.Serialization.Internal.Yaml;
+
+namespace IracingSdkDotNet.Serialization.Models.Session.DriverInfo;
 
 public class DriverModel
 {
@@ -14,18 +16,32 @@ public class DriverModel
     public string CarPath { get; set; } // %s
     public int CarClassID { get; set; } // %d
     public int CarID { get; set; } // %d
-    public int CarIsPaceCar { get; set; } // %d (boolean)
-    public int CarIsAI { get; set; } // %d (boolean)
-    public int CarIsElectric { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool CarIsPaceCar { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool CarIsAI { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool CarIsElectric { get; set; } // %d (boolean)
     public string CarScreenName { get; set; } // %s
     public string CarScreenNameShort { get; set; } // %s
     public string CarClassShortName { get; set; } // %s
     public int CarClassRelSpeed { get; set; } // %d
     public int CarClassLicenseLevel { get; set; } // %d
-    public string CarClassMaxFuelPct { get; set; } // %.3f %
-    public string CarClassWeightPenalty { get; set; } // %.3f kg
-    public string CarClassPowerAdjust { get; set; } // %.3f %
-    public string CarClassDryTireSetLimit { get; set; } // %d %
+
+    [YamlConverter(typeof(PercentageYamlConverter))]
+    public float CarClassMaxFuelPct { get; set; } // %.3f %
+
+    [SingleUnitYamlConverterFactory(" kg")]
+    public float CarClassWeightPenalty { get; set; } // %.3f kg
+
+    [YamlConverter(typeof(PercentageYamlConverter))]
+    public float CarClassPowerAdjust { get; set; } // %.3f %
+
+    [YamlConverter(typeof(PercentageYamlConverter))]
+    public float CarClassDryTireSetLimit { get; set; } // %d %
     public string CarClassColor { get; set; } // 0x%02x%02x%02x
     public float CarClassEstLapTime { get; set; } // %.4f
     public int IRating { get; set; } // %d
@@ -33,7 +49,9 @@ public class DriverModel
     public int LicSubLevel { get; set; } // %d
     public string LicString { get; set; } // %s
     public string LicColor { get; set; } // 0x%s
-    public int IsSpectator { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool IsSpectator { get; set; } // %d (boolean)
     public string CarDesignStr { get; set; } // %s
     public string HelmetDesignStr { get; set; } // %s
     public string SuitDesignStr { get; set; } // %s

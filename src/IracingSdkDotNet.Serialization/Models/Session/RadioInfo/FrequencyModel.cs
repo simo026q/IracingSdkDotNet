@@ -1,4 +1,6 @@
-﻿namespace IracingSdkDotNet.Serialization.Models.Session.RadioInfo;
+﻿using IracingSdkDotNet.Serialization.Internal.Yaml;
+
+namespace IracingSdkDotNet.Serialization.Models.Session.RadioInfo;
 
 public class FrequencyModel
 {
@@ -8,9 +10,19 @@ public class FrequencyModel
     public int CarIdx { get; set; } // %d
     public int EntryIdx { get; set; } // %d
     public int ClubID { get; set; } //%d
-    public int CanScan { get; set; } // %d (boolean)
-    public int CanSquawk { get; set; } // %d (boolean)
-    public int Muted { get; set; } // %d (boolean)
-    public int IsMutable { get; set; } // %d (boolean)
-    public int IsDeletable { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool CanScan { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool CanSquawk { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool Muted { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool IsMutable { get; set; } // %d (boolean)
+
+    [YamlConverter(typeof(IntegerBooleanYamlConverter))]
+    public bool IsDeletable { get; set; } // %d (boolean)
 }
