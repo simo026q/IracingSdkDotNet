@@ -14,7 +14,12 @@ internal sealed class YamlConverterAttribute
     {
         if (!typeof(YamlConverter).IsAssignableFrom(converterType))
         {
-            throw new InvalidOperationException($"The type '{converterType.FullName}' does not implement '{nameof(YamlConverter)}'.");
+            throw new ArgumentException($"The type '{converterType.FullName}' does not implement '{nameof(YamlConverter)}'.");
+        }
+
+        if (converterType.GetConstructor(Type.EmptyTypes) is null)
+        {
+            throw new ArgumentException($"The type '{converterType.FullName}' does not have a parameterless constructor.");
         }
 
         ConverterType = converterType;
