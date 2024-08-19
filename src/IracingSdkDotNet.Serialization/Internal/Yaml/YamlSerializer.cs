@@ -9,7 +9,7 @@ namespace IracingSdkDotNet.Serialization.Internal.Yaml;
 
 public static class YamlSerializer
 {
-    private sealed class TypeDescriptor(Type type, YamlConverter? converter)
+    private sealed class TypeDescriptor(Type type, YamlConverter? converter = null)
     {
         public Type Type { get; } = type;
         public YamlConverter? Converter { get; } = converter;
@@ -20,7 +20,7 @@ public static class YamlSerializer
         parser.Consume<StreamStart>();
         parser.Consume<DocumentStart>();
 
-        return DeserializeObject(parser, new TypeDescriptor(type, null), serializerOptions);
+        return DeserializeValue(parser, new TypeDescriptor(type), serializerOptions);
     }
 
     private static object? DeserializeObject(Parser parser, TypeDescriptor typeDescriptor, YamlSerializerOptions serializerOptions)
@@ -85,7 +85,7 @@ public static class YamlSerializer
             parser.Consume<SequenceStart>();
             while (!parser.TryConsume<SequenceEnd>(out _))
             {
-                var value = DeserializeValue(parser, new TypeDescriptor(itemType, null), serializerOptions);
+                var value = DeserializeValue(parser, new TypeDescriptor(itemType), serializerOptions);
                 if (value != null)
                 {
                     addMethod?.Invoke(list, [value]);
@@ -95,6 +95,6 @@ public static class YamlSerializer
             return list;
         }
 
-        return DeserializeObject(parser, new TypeDescriptor(type, null), serializerOptions);
+        return DeserializeObject(parser, new TypeDescriptor(type), serializerOptions);
     }
 }
