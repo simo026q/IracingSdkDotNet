@@ -102,17 +102,6 @@ public sealed class IracingSdkCore
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="IracingSdkCore"/> class with predefined <see cref="MemoryMappedViewAccessor"/>.
-    /// </summary>
-    /// <remarks>Should only be used for testing purposes.</remarks>
-    /// <param name="accessor">The <see cref="MemoryMappedViewAccessor"/> to use for reading data.</param>
-    public IracingSdkCore(MemoryMappedViewAccessor accessor)
-        : this()
-    {
-        DataReader = new IracingDataReader(accessor);
-    }
-
-    /// <summary>
     /// Finalizes an instance of the <see cref="IracingSdkCore"/> class.
     /// </summary>
     ~IracingSdkCore()
