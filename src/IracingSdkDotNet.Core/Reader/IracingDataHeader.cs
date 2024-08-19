@@ -23,7 +23,7 @@ public sealed class IracingDataHeader(MemoryMappedViewAccessor viewAccessor)
     /// <summary>
     /// Indicates that the status is connected.
     /// </summary>
-    public bool IsConnected => (Status & 1) > 0;
+    public bool IsConnected => (Status & 1) != 0;
 
     /// <summary>
     /// The telemetry update tick rate.
@@ -31,7 +31,7 @@ public sealed class IracingDataHeader(MemoryMappedViewAccessor viewAccessor)
     public int TickRate => _viewAccessor.ReadInt32(8);
 
     /// <summary>
-    /// The current update of the session info. When this changes, the session info has been updated.
+    /// The current update of the session info. When this is incremented, the session info has been updated.
     /// </summary>
     public int SessionInfoUpdate => _viewAccessor.ReadInt32(12);
 
@@ -74,7 +74,8 @@ public sealed class IracingDataHeader(MemoryMappedViewAccessor viewAccessor)
         {
             int maxTickCount = _viewAccessor.ReadInt32(48);
             int curOffset = _viewAccessor.ReadInt32(48 + 4);
-            for (var i = 1; i < BufferCount; i++)
+            int bufferCount = BufferCount;
+            for (var i = 1; i < bufferCount; i++)
             {
                 var curTick = _viewAccessor.ReadInt32(48 + i * 16);
                 if (maxTickCount < curTick)
