@@ -13,7 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A0290058
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IracingSdkDotNet.Serialization", "src\IracingSdkDotNet.Serialization\IracingSdkDotNet.Serialization.csproj", "{2FDBFB52-CF36-447E-8E4D-F62858E6E487}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IracingSdkDotNet.Serialization.ConsoleTest", "tests\IracingSdkDotNet.Serialization.ConsoleTest\IracingSdkDotNet.Serialization.ConsoleTest.csproj", "{8CE482F5-1B7F-4095-94DA-D5B2D8865ECA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IracingSdkDotNet.Serialization.ConsoleTest", "tests\IracingSdkDotNet.Serialization.ConsoleTest\IracingSdkDotNet.Serialization.ConsoleTest.csproj", "{8CE482F5-1B7F-4095-94DA-D5B2D8865ECA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IracingSdkDotNet.Serialization.Benchmarks", "tests\IracingSdkDotNet.Serialization.Benchmarks\IracingSdkDotNet.Serialization.Benchmarks.csproj", "{77ABD37B-29F7-44C3-A0F9-5F87AA834ABD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{8CE482F5-1B7F-4095-94DA-D5B2D8865ECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CE482F5-1B7F-4095-94DA-D5B2D8865ECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CE482F5-1B7F-4095-94DA-D5B2D8865ECA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77ABD37B-29F7-44C3-A0F9-5F87AA834ABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77ABD37B-29F7-44C3-A0F9-5F87AA834ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77ABD37B-29F7-44C3-A0F9-5F87AA834ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77ABD37B-29F7-44C3-A0F9-5F87AA834ABD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{9056E20A-CD7D-4A0D-A964-F2C1B97DAD68} = {A0290058-5F3C-4D09-BBBB-4BDC3B466AA6}
 		{2FDBFB52-CF36-447E-8E4D-F62858E6E487} = {1DBEAB86-B4EE-4A09-B67D-3EF258427947}
 		{8CE482F5-1B7F-4095-94DA-D5B2D8865ECA} = {A0290058-5F3C-4D09-BBBB-4BDC3B466AA6}
+		{77ABD37B-29F7-44C3-A0F9-5F87AA834ABD} = {A0290058-5F3C-4D09-BBBB-4BDC3B466AA6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3BC479A1-AF2C-43C0-A39D-C8EB30B840AC}
