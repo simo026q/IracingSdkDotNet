@@ -1,7 +1,8 @@
-﻿using System;
+﻿using IracingSdkDotNet.Serialization.Yaml.Converters;
+using System;
 using System.Collections.Generic;
 
-namespace IracingSdkDotNet.Serialization.Internal.Yaml;
+namespace IracingSdkDotNet.Serialization.Yaml;
 
 public sealed class YamlSerializerOptions
 {

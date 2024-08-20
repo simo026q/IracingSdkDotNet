@@ -1,4 +1,5 @@
-﻿using IracingSdkDotNet.Serialization.Internal.Yaml;
+﻿using IracingSdkDotNet.Serialization.Yaml;
+using IracingSdkDotNet.Serialization.Yaml.Converters;
 
 namespace IracingSdkDotNet.Serialization.Models.Session.WeekendInfo;
 

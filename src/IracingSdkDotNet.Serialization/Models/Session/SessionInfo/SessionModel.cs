@@ -1,4 +1,4 @@
-﻿using IracingSdkDotNet.Serialization.Internal.Yaml;
+﻿using IracingSdkDotNet.Serialization.Yaml;
 using System.Collections.Generic;
 
 namespace IracingSdkDotNet.Serialization.Models.Session.SessionInfo;
@@ -9,13 +9,13 @@ public class SessionModel
     public string SessionLaps { get; set; } // %d or "unlimited"
 
     [SingleUnitYamlConverterFactory(" sec")]
-    public string SessionTime { get; set; } // %0.4f sec
+    public float SessionTime { get; set; } // %0.4f sec
     public int SessionNumLapsToAvg { get; set; } // %d
     public string SessionType { get; set; } // %s
     public string SessionTrackRubberState { get; set; } // %s
 
     [SingleUnitYamlConverterFactory(" sec")]
-    public string SessionName { get; set; } // %0.2f sec
+    public float SessionName { get; set; } // %0.2f sec
     public string SessionSubType { get; set; } // %s
     public int SessionSkipped { get; set; } // %d (?boolean)
     public int SessionRunGroupsUsed { get; set; } // %d (?boolean)

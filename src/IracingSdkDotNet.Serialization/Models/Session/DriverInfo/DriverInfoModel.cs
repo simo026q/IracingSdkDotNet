@@ -1,4 +1,5 @@
-﻿using IracingSdkDotNet.Serialization.Internal.Yaml;
+﻿using IracingSdkDotNet.Serialization.Yaml;
+using IracingSdkDotNet.Serialization.Yaml.Converters;
 using System.Collections.Generic;
 
 namespace IracingSdkDotNet.Serialization.Models.Session.DriverInfo;

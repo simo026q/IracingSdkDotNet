@@ -1,7 +1,7 @@
 ﻿using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 
-namespace IracingSdkDotNet.Serialization.Internal.Yaml;
+namespace IracingSdkDotNet.Serialization.Yaml.Extensions;
 
 internal static class ParserExtensions
 {

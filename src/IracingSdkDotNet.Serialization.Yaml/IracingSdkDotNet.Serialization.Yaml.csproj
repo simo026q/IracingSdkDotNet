@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFrameworks>netstandard2.0;net8.0-windows;net481</TargetFrameworks>
+	<LangVersion>12</LangVersion>
+	<Nullable>enable</Nullable>
+	<Authors>simo026q</Authors>
+	<NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="16.0.0" />
+  </ItemGroup>
+
+</Project>

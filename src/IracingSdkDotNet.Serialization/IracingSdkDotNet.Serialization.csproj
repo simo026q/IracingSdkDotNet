@@ -14,7 +14,10 @@
 
   <ItemGroup>
     <PackageReference Include="IracingSdkDotNet.Core" Version="1.0.0-alpha.1" />
-    <PackageReference Include="YamlDotNet" Version="16.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IracingSdkDotNet.Serialization.Yaml\IracingSdkDotNet.Serialization.Yaml.csproj" />
   </ItemGroup>
 
 </Project>

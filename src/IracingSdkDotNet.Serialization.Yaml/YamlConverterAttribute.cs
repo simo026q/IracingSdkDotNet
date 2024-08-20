@@ -1,9 +1,10 @@
-﻿using System;
+﻿using IracingSdkDotNet.Serialization.Yaml.Converters;
+using System;
 using System.Collections.Concurrent;
 
-namespace IracingSdkDotNet.Serialization.Internal.Yaml;
+namespace IracingSdkDotNet.Serialization.Yaml;
 
-internal sealed class YamlConverterAttribute 
+public sealed class YamlConverterAttribute
     : YamlConverterFactoryAttribute
 {
     private static readonly ConcurrentDictionary<Type, YamlConverter> Converters = new();

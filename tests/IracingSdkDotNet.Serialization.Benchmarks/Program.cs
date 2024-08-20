@@ -1,9 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using IracingSdkDotNet.Serialization.Internal.Yaml;
 using IracingSdkDotNet.Serialization.Models.Session;
 using irsdkSharp.Serialization.Models.Session;
-using YamlDotNet.Core;
 
 BenchmarkRunner.Run<Benchmarks>();
 
@@ -15,7 +13,7 @@ public class Benchmarks
     [Benchmark]
     public IracingSessionModel? Deserialize()
     {
-        return (IracingSessionModel?)YamlSerializer.Deserialize(new Parser(new StringReader(Yaml)), typeof(IracingSessionModel), YamlSerializerOptions.Default);
+        return IracingSessionModel.Deserialize(Yaml);
     }
 
     [Benchmark]
