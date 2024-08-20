@@ -1,145 +1,107 @@
 ﻿using System;
 using System.Globalization;
+using YamlDotNet.Core;
+using YamlDotNet.Core.Events;
 
 namespace IracingSdkDotNet.Serialization.Internal.Yaml;
 
 public abstract class YamlConverter
 {
     public abstract bool CanConvert(Type type);
-    public abstract object? ReadAsObject(string value);
-    public abstract string WriteAsObject(object? value);
+    public abstract object? ReadAsObject(Parser parser);
 }
 
 public abstract class YamlConverter<T> : YamlConverter
 {
-    public abstract T? ReadYaml(string value);
-    public abstract string WriteYaml(T? value);
+    public abstract T? ReadYaml(Parser parser);
 
-    public override bool CanConvert(Type type)
-    {
-        return type == typeof(T);
-    }
+    public override bool CanConvert(Type type) 
+        => type == typeof(T);
 
-    public sealed override object? ReadAsObject(string value)
-    {
-        return ReadYaml(value);
-    }
-
-    public sealed override string WriteAsObject(object? value)
-    {
-        return WriteYaml((T?)value);
-    }
+    public sealed override object? ReadAsObject(Parser parser) 
+        => ReadYaml(parser);
 }
 
-internal sealed class StringYamlConverter : YamlConverter<string>
+public abstract class ScalarYamlConverter<T> : YamlConverter<T>
+{
+    public abstract T ReadValue(string value);
+
+    public sealed override T? ReadYaml(Parser parser) 
+        => ReadValue(parser.Consume<Scalar>().Value);
+}
+
+internal sealed class StringYamlConverter : ScalarYamlConverter<string>
 {
     public static readonly StringYamlConverter Instance = new();
 
-    public override string ReadYaml(string value)
-    {
-        return value;
-    }
-
-    public override string WriteYaml(string value)
+    public override string ReadValue(string value)
     {
         return value;
     }
 }
 
-internal sealed class BooleanYamlConverter : YamlConverter<bool>
+internal sealed class BooleanYamlConverter : ScalarYamlConverter<bool>
 {
     public static readonly BooleanYamlConverter Instance = new();
 
-    public override bool ReadYaml(string value)
+    public override bool ReadValue(string value)
     {
         return bool.TryParse(value, out bool result) && result;
     }
-
-    public override string WriteYaml(bool value)
-    {
-        return value 
-            ? "true" 
-            : "false";
-    }
 }
 
-internal sealed class Int32YamlConverter : YamlConverter<int>
+internal sealed class Int32YamlConverter : ScalarYamlConverter<int>
 {
     public static readonly Int32YamlConverter Instance = new();
 
-    public override int ReadYaml(string value)
+    public override int ReadValue(string value)
     {
         return int.TryParse(value, out int result) 
             ? result 
             : default;
     }
-
-    public override string WriteYaml(int value)
-    {
-        return value.ToString();
-    }
 }
 
-internal sealed class SingleYamlConverter : YamlConverter<float>
+internal sealed class SingleYamlConverter : ScalarYamlConverter<float>
 {
     public static readonly SingleYamlConverter Instance = new();
 
-    public override float ReadYaml(string value)
+    public override float ReadValue(string value)
     {
         return float.TryParse(value, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out float result)
             ? result
             : default;
     }
-
-    public override string WriteYaml(float value)
-    {
-        return value.ToString();
-    }
 }
 
-internal sealed class PercentageYamlConverter : YamlConverter<float>
+internal sealed class PercentageYamlConverter : ScalarYamlConverter<float>
 {
     private const string Unit = " %";
 
-    public override float ReadYaml(string value)
+    public override float ReadValue(string value)
     {
         string valueWithoutUnit = value.Replace(Unit, string.Empty);
 
-        return SingleYamlConverter.Instance.ReadYaml(valueWithoutUnit) / 100;
-    }
-
-    public override string WriteYaml(float value)
-    {
-        return string.Concat(SingleYamlConverter.Instance.WriteYaml(value * 100), Unit);
+        return SingleYamlConverter.Instance.ReadValue(valueWithoutUnit) / 100;
     }
 }
 
-internal sealed class IntegerBooleanYamlConverter : YamlConverter<bool>
+internal sealed class IntegerBooleanYamlConverter : ScalarYamlConverter<bool>
 {
-    public override bool ReadYaml(string value)
+    public override bool ReadValue(string value)
     {
-        return Int32YamlConverter.Instance.ReadYaml(value) == 1;
-    }
-
-    public override string WriteYaml(bool value)
-    {
-        return Int32YamlConverter.Instance.WriteYaml(value ? 1 : 0);
+        return Int32YamlConverter.Instance.ReadValue(value) == 1;
     }
 }
 
-internal sealed class SingleUnitYamlConverter(string unit) : YamlConverter<float>
+internal sealed class SingleUnitYamlConverter(string unit) : ScalarYamlConverter<float>
 {
     private readonly string _unit = unit;
 
-    public override float ReadYaml(string value)
+    public override float ReadValue(string value)
     {
         string valueWithoutUnit = value.Replace(_unit, string.Empty);
 
-        return SingleYamlConverter.Instance.ReadYaml(valueWithoutUnit);
-    }
-
-    public override string WriteYaml(float value)
-    {
-        return string.Concat(SingleYamlConverter.Instance.WriteYaml(value), _unit);
+        return SingleYamlConverter.Instance.ReadValue(valueWithoutUnit);
     }
 }

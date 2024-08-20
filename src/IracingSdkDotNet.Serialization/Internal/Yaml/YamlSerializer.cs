@@ -72,8 +72,7 @@ public static class YamlSerializer
 
         if (converter != null)
         {
-            string scalarValue = parser.Consume<Scalar>().Value;
-            return converter.ReadAsObject(scalarValue);
+            return converter.ReadAsObject(parser);
         }
 
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
